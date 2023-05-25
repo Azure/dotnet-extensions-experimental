@@ -3,7 +3,7 @@ $changed = (select-string "nothing to commit" artifacts\status.txt).count -eq 0
 if (-not $changed) { return $changed }
 # Check if tracking issue is open/closed
 $Headers = @{ Authorization = 'token {0}' -f $ENV:GITHUB_TOKEN; };
-$result = Invoke-RestMethod -Uri $issue
+$result = Invoke-RestMethod -Uri $issue -Headers $Headers
 if ($result.state -eq "closed") {
  $json = "{ `"state`": `"open`" }"
  $result = Invoke-RestMethod -Method PATCH -Headers $Headers -Uri $issue -Body $json
