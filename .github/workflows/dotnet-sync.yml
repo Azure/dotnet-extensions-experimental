@@ -51,8 +51,12 @@ jobs:
         git diff > ..\artifacts\diff.txt
     - uses: actions/upload-artifact@v3
       with:
-        name: results
-        path: artifacts
+        name: status.txt
+        path: artifacts\status.txt
+    - uses: actions/upload-artifact@v3
+      with:
+        name: diff.txt
+        path: artifacts\diff.txt
     - name: Check and Notify
       id: check
       shell: pwsh
