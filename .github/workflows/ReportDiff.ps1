@@ -29,7 +29,7 @@ $result = Invoke-RestMethod -Method POST -Headers $Headers -Uri $issue -Body $js
 
 # Check if there's an open PR in Azure or Dotnet orgs to resolve this difference.
 $sendpr = $true
-$Headers = @{ Accept = 'application/vnd.github.v3+json' };
+$Headers = @{ Accept = 'application/vnd.github.v3+json'; Authorization = 'token {0}' -f $ENV:GITHUB_TOKEN; };
 
 # $prsLink = "https://api.github.com/repos/azure/dotnet-extensions-experimental/pulls?state=open"
 $prsLink = "https://api.github.com/repos/tratcher/dotnet-extensions-experimental/pulls?state=open"
