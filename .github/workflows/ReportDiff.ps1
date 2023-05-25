@@ -31,7 +31,8 @@ $result = Invoke-RestMethod -Method POST -Headers $Headers -Uri $issue -Body $js
 $sendpr = $true
 $Headers = @{ Accept = 'application/vnd.github.v3+json' };
 
-$prsLink = "https://api.github.com/repos/azure/dotnet-extensions-experimental/pulls?state=open"
+# $prsLink = "https://api.github.com/repos/azure/dotnet-extensions-experimental/pulls?state=open"
+$prsLink = "https://api.github.com/repos/tratcher/dotnet-extensions-experimental/pulls?state=open"
 $result = Invoke-RestMethod -Method GET -Headers $Headers -Uri $prsLink
 
 foreach ($pr in $result) {
