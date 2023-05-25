@@ -1,0 +1,77 @@
+name: Azure-Dotnet-Extensions Code Sync
+on:
+  # Manual run
+  workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows#scheduled-events-schedule
+    # Once per day at midnight PST (8 UTC)
+    - cron: '0 8 * * *'
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  compare_repos:
+    # Comment out this line to test the scripts in a fork
+    # if: github.repository == 'azure/dotnet-extensions-experimental'
+    name: Sync shared code between Azure and DotNet
+    runs-on: windows-latest
+    steps:
+    - name: Checkout Azure Extensions
+      uses: actions/checkout@v3
+      with:
+        # Test this script using changes in a fork
+        repository: 'azure/dotnet-extensions-experimental'
+        path: azure-extensions
+        ref: main
+    - name: Checkout dotnet extensions
+      uses: actions/checkout@v3
+      with:
+        # Test this script using changes in a fork
+        repository: 'dotnet/extensions'
+        path: dotnet-extensions
+        ref: main
+    - name: Copy
+      shell: cmd
+      working-directory: .\dotnet-extensions\src\Shared\AzureSync\
+      env:
+        AZUREEXTENSIONS_REPO: d:\a\dotnet-extensions-experimental\dotnet-extensions-experimental\azure-extensions\
+      run: CopyToAzure.cmd
+    - name: Diff
+      shell: cmd
+      working-directory: .\azure-extensions\
+      run: |
+        mkdir ..\artifacts
+        git status > ..\artifacts\status.txt
+        git diff > ..\artifacts\diff.txt
+    - uses: actions/upload-artifact@v3
+      with:
+        name: results
+        path: artifacts
+    - name: Check and Notify
+      id: check
+      shell: pwsh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # Test this script using an issue in the local forked repo
+        # $issue = 'https://api.github.com/repos/azure/dotnet-extensions-experimental/issues/1'
+        $issue = 'https://api.github.com/repos/Tratcher/dotnet-extensions-experimental/issues/1'
+        $sendpr = .\azure-extensions\.github\workflows\ReportDiff.ps1
+        echo "sendpr=$sendpr" >> $env:GITHUB_OUTPUT
+    - name: Send PR
+      if: steps.check.outputs.sendpr == 'true'
+      # https://github.com/marketplace/actions/create-pull-request
+      uses: dotnet/actions-create-pull-request@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        path: .\azure-extensions
+        commit-message: 'Sync shared code from dotnet/extensions'
+        title: 'Sync shared code from dotnet/extensions'
+        body: 'This PR was automatically generated to sync shared code changes from dotnet/extensions. Fixes #1.'
+        base: main
+        branch: github-action/sync-dotnet-extensions
+        branch-suffix: timestamp
