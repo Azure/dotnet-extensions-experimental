@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <!-- Automatic dependencies -->
+    <PackageVersion Include="Microsoft.AspNetCore.HeaderParsing" Version="$(MicrosoftAspNetCoreHeaderParsingVersion)" />
+    <PackageVersion Include="Microsoft.Bcl.TimeProvider" Version="$(MicrosoftBclTimeProviderVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(MicrosoftExtensionsConfigurationVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="$(MicrosoftExtensionsConfigurationAbstractionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(MicrosoftExtensionsConfigurationJsonVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MicrosoftExtensionsDependencyInjectionAbstractionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(MicrosoftExtensionsDiagnosticsHealthChecksVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.EnumStrings" Version="$(MicrosoftExtensionsEnumStringsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(MicrosoftExtensionsHostingAbstractionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Testing.StartupInitialization" Version="$(MicrosoftExtensionsHostingTestingStartupInitializationVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="$(MicrosoftExtensionsHttpResilienceVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="$(MicrosoftExtensionsOptionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(MicrosoftExtensionsOptionsConfigurationExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ValidateOnStart" Version="$(MicrosoftExtensionsOptionsValidateOnStartVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Options.Validation" Version="$(MicrosoftExtensionsOptionsValidationVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Primitives" Version="$(MicrosoftExtensionsPrimitivesVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Telemetry" Version="$(MicrosoftExtensionsTelemetryVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Telemetry.Abstractions" Version="$(MicrosoftExtensionsTelemetryAbstractionsVersion)" />
+    <PackageVersion Include="System.Cloud.DocumentDb.Abstractions" Version="$(SystemCloudDocumentDbAbstractionsVersion)" />
+    <PackageVersion Include="System.Cloud.Messaging.Abstractions" Version="$(SystemCloudMessagingAbstractionsVersion)" />
+    <PackageVersion Include="System.Text.Json" Version="$(SystemTextJsonVersion)" />
+
+    <!-- Manual dependencies -->
+    <PackageVersion Include="Azure.Core" Version="1.25.0" />
+    <PackageVersion Include="Azure.Identity" Version="1.7.0" />
+    <PackageVersion Include="Azure.Storage.Queues" Version="12.12.0" />
+    <PackageVersion Include="Microsoft.Azure.Cosmos" Version="3.28.0-preview"/>
+    <PackageVersion Include="Microsoft.IO.RecyclableMemoryStream" Version="2.2.0" />
+    <PackageVersion Include="Microsoft.ServiceFabric.Services" Version="4.2.434" />
+    <PackageVersion Include="Microsoft.ServiceFabric" Version="[7.2.434, )" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)\General-net462.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\General-netcoreapp3.1.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\General-net6.0.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\General-latest.props" />
+</Project>

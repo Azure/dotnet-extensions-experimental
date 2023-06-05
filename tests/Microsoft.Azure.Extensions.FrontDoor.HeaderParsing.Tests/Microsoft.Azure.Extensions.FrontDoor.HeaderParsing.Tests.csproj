@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Tests for $(MSBuildProjectName.Replace('.Tests', ''))</Description>
+    <TargetFrameworks>$(NetCoreTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Net.Http.Headers" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Microsoft.Azure.Extensions.FrontDoor.HeaderParsing\Microsoft.Azure.Extensions.FrontDoor.HeaderParsing.csproj" ProjectUnderTest="true" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Azure Storage Queue Implementation for Async Processing</Description>
+    <Workstream>Fundamentals</Workstream>
+    <Category>Async Processing</Category>
+    <Subcategory>Azure Storage Queue</Subcategory>
+    <InjectExperimentalAttributeOnLegacy>true</InjectExperimentalAttributeOnLegacy>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Stage>dev</Stage>
+    <MinCodeCoverage>0</MinCodeCoverage>
+    <MinMutationScore>70</MinMutationScore>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Queues" />
+    <PackageReference Include="Microsoft.Extensions.EnumStrings" />
+    <PackageReference Include="System.Cloud.Messaging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleToTest Include="$(AssemblyName).Tests" />
+    <InternalsVisibleToDynamicProxyGenAssembly2 Include="*" />
+  </ItemGroup>
+</Project>

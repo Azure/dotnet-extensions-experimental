@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Disable building Integration Test projects in LUT. -->
+    <BuildForLiveUnitTesting Condition="'$(BuildForLiveUnitTesting)' == '' and '$(IsIntegrationTestProject)' == 'true'">false</BuildForLiveUnitTesting>
+
+    <!-- Redirect test logs into a subfolder -->
+    <TestResultsLogDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsLogDir)', 'TestLogs'))</TestResultsLogDir>
+
+    <!--
+      Run tests with the VS Test Runner (dotnet test) instead of the XUnit Test runner (dotnet exec).
+      This is needed to produce Cobertura code coverage. See the targets file to more information.
+    -->
+    <UseVSTestRunner>true</UseVSTestRunner>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Automatic dependencies -->
+    <PackageVersion Include="Microsoft.Extensions.Compliance.Testing" Version="$(MicrosoftExtensionsComplianceTestingVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="$(MicrosoftExtensionsConfigurationBinderVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(MicrosoftExtensionsDependencyInjectionVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Testing" Version="$(MicrosoftExtensionsHostingTestingVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="$(MicrosoftExtensionsHttpVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Telemetry" Version="$(MicrosoftExtensionsHttpTelemetryVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Telemetry.Console" Version="$(MicrosoftExtensionsTelemetryConsoleVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Telemetry.Testing" Version="$(MicrosoftExtensionsTelemetryTestingVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="$(MicrosoftExtensionsTimeProviderTestingVersion)" />
+
+    <!-- Manual dependencies -->
+    <PackageVersion Include="AutoFixture.AutoMoq" Version="4.17.0" />
+    <PackageVersion Include="autofixture" Version="4.17.0" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.13.2" />
+    <PackageVersion Include="FluentAssertions" Version="6.2.0" />
+    <PackageVersion Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
+    <PackageVersion Include="Moq.AutoMock" Version="3.1.0" />
+    <PackageVersion Include="Moq" Version="4.16.1" />
+    <PackageVersion Include="ServiceFabric.Mocks" Version="4.2.6" />
+    <PackageVersion Include="StrongNamer" Version="0.2.5" />
+    <PackageVersion Include="xunit.assert" Version="2.4.2" />
+    <PackageVersion Include="Xunit.Combinatorial" Version="1.5.25" />
+    <PackageVersion Include="xunit.extensibility.execution" Version="2.4.2" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)\TestOnly-net462.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\TestOnly-netcoreapp3.1.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\TestOnly-net6.0.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\TestOnly-latest.props" />
+</Project>
