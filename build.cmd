@@ -11,4 +11,4 @@ IF ["%_args%"] == [""] (
 )
 
 powershell -ExecutionPolicy ByPass -NoProfile -command "& """%~dp0eng\common\Build.ps1""" %_args%"
-exit /b %ERRORLEVEL%
+EXIT /b %ERRORLEVEL%
