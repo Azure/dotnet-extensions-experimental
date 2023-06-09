@@ -333,7 +333,7 @@ public class BaseCosmosClientTests
         var exception = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
             () => client.FetchDocumentsAsync<TestDocument>(_request, null, CancellationToken.None));
 
-        exception.Message.Should().StartWith("ToStreamFeedIterator is only supported on cosmos LINQ query operations");
+        exception.Message.Should().StartWith("ToFeedIterator is only supported on Cosmos LINQ query operations");
 
         TestDocument document = TestDocument.GetDefault();
 

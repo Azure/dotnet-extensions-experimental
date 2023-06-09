@@ -25,5 +25,6 @@ public class CosmosSystemTextJsonSerializerTest
         Assert.Equal(longString, serializer.FromStream<string>(stream));
 
         Assert.Null(serializer2.FromStream<string>(Stream.Null));
+        Assert.Null(serializer2.FromStream<string>(null!));
     }
 }

@@ -556,6 +556,11 @@ public class ExtensionsTests
             return Task.FromResult<TOptions?>(default);
         }
 
+        public FeedIterator<TDocument> ToEncryptionFeedIterator<TDocument>(Container container, IQueryable<TDocument> queryable)
+        {
+            return null!;
+        }
+
         public FeedIterator ToEncryptionStreamIterator<TDocument>(Container container, IQueryable<TDocument> queryable)
         {
             return null!;

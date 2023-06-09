@@ -491,6 +491,9 @@ public class CosmosClientAdapterTests
             Uri cosmosEndpointUri, TDocument document, CancellationToken cancellationToken)
             where TDocument : notnull
             where TOptions : Azure.Cosmos.RequestOptions => throw this;
+
+        public FeedIterator<TDocument> ToEncryptionFeedIterator<TDocument>(Container container, IQueryable<TDocument> queryable) => throw this;
+
         public FeedIterator ToEncryptionStreamIterator<TDocument>(Container container, IQueryable<TDocument> queryable) => throw this;
     }
 
