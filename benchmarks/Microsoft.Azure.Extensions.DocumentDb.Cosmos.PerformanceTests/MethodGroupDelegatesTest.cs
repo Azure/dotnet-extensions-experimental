@@ -6,8 +6,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.Azure.Extensions.Document.Cosmos.Bench;
 
-#pragma warning disable R9A034 // Optimize method group use to avoid allocations
-
 [MemoryDiagnoser]
 public class MethodGroupDelegatesTest
 {
@@ -26,13 +24,13 @@ public class MethodGroupDelegatesTest
     [Benchmark]
     public static int TestIntDelegateFunc() => InvokeDelegate(Producer<int>);
 
-    // In a case we know actual type, prestoring to a specific delegate avoid the issue,
+    // In a case we know actual type, pre-storing to a specific delegate avoid the issue,
     // since the resolution work not repeated and no memory allocated even for first delegate.
     // This is useful when we using a generic tool reducing scope to our specific scenario.
     // But I would expect compiler/intepreter to handle even generic case calling `InvokeDelegate(Producer)` with no type specification
     // I wonder would it be fixed in C# 6 https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-10.0/lambda-improvements
     // Where lambdas with attributes introduced
-    // So, that in worst case we would be able to prestore generic one to `[T]Func<T>` kind of delegate.
+    // So, that in worst case we would be able to pre-store generic one to `[T]Func<T>` kind of delegate.
     // Hopefully this would work as fast as Func<int> for a specific type.
     [Benchmark(Baseline = true)]
     public int TestIntFunc() => InvokeDelegate(_intDelegateMethod);

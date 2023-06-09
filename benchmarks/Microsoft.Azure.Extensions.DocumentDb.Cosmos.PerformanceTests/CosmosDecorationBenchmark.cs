@@ -10,8 +10,6 @@ using Microsoft.Azure.Extensions.Document.Cosmos.Decoration;
 
 namespace Microsoft.Azure.Extensions.Document.Cosmos.Bench;
 
-#pragma warning disable R9A034 // Optimize method group use to avoid allocations
-
 [GcServer(true)]
 [MinColumn]
 [MaxColumn]
