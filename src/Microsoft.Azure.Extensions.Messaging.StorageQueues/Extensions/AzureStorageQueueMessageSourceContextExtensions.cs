@@ -14,112 +14,83 @@ using Microsoft.Shared.Diagnostics;
 namespace Microsoft.Azure.Extensions.Messaging.StorageQueues;
 
 /// <summary>
-/// Azure Storage Queue Extensions for <see cref="MessageContext"/>.
+/// Provides extension methods for the <see cref="MessageContext"/> to add support for storing Azure Storage Queue properties with the message.
 /// </summary>
 public static class AzureStorageQueueMessageSourceContextExtensions
 {
     /// <summary>
+    /// Sets <see cref="AzureStorageQueueMessageProcessingState"/> in the <see cref="MessageContext"/>.
+    /// </summary>
+    /// <param name="context">The message context.</param>
+    /// <param name="state">The processing state of the message.</param>
+    /// <exception cref="ArgumentNullException">If the <paramref name="context"/> is null.</exception>
+    public static void SetAzureStorageQueueMessageProcessingState(this MessageContext context, AzureStorageQueueMessageProcessingState state)
+    {
+        _ = Throw.IfNullOrMemberNull(context, context?.Features);
+        context.Features.Set<AzureStorageQueueMessageProcessingState?>(state);
+    }
+
+    /// <summary>
     /// Try to obtain <see cref="AzureStorageQueueMessageProcessingState"/> from the <see cref="MessageContext"/>.
     /// </summary>
-    /// <param name="context"><see cref="MessageContext"/>.</param>
-    /// <param name="state">The <see langword="out"/> to store the <see cref="AzureStorageQueueMessageProcessingState"/>.</param>
+    /// <param name="context">The message context.</param>
+    /// <param name="state">The optional processing state.</param>
     /// <returns><see cref="bool"/> and if <see langword="true"/>, a corresponding <see cref="AzureStorageQueueMessageProcessingState"/>.</returns>
     /// <exception cref="ArgumentNullException">If the <paramref name="context"/> is null.</exception>
-    [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Handled by Try pattern.")]
-    public static bool TryGetAzureStorageQueueMessageProcessingState(this MessageContext context, out AzureStorageQueueMessageProcessingState state)
+    public static bool TryGetAzureStorageQueueMessageProcessingState(this MessageContext context, [NotNullWhen(true)] out AzureStorageQueueMessageProcessingState? state)
     {
-        _ = Throw.IfNull(context);
-        _ = Throw.IfNull(context.Features);
+        _ = Throw.IfNullOrMemberNull(context, context?.Features);
 
-        try
-        {
-            state = context.Features.Get<AzureStorageQueueMessageProcessingState>();
-            return true;
-        }
-        catch (Exception)
-        {
-            state = AzureStorageQueueMessageProcessingState.Processing;
-            return false;
-        }
+        state = context.Features.Get<AzureStorageQueueMessageProcessingState?>();
+        return state.HasValue;
     }
 
     /// <summary>
     /// Try to obtain <see cref="QueueMessage"/> from the <see cref="MessageContext"/>.
     /// </summary>
-    /// <param name="context"><see cref="MessageContext"/>.</param>
-    /// <param name="queueMessage">The <see langword="out"/> to store the <see cref="QueueMessage"/>.</param>
+    /// <param name="context">The message context.</param>
+    /// <param name="queueMessage">The optional queue message properties.</param>
     /// <returns><see cref="bool"/> and if <see langword="true"/>, a corresponding <see cref="QueueMessage"/>.</returns>
     /// <exception cref="ArgumentNullException">If the <paramref name="context"/> is null.</exception>
-    [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Handled by Try pattern.")]
-    public static bool TryGetAzureStorageQueueMessage(this MessageContext context, out QueueMessage? queueMessage)
+    public static bool TryGetAzureStorageQueueMessage(this MessageContext context, [NotNullWhen(true)] out QueueMessage? queueMessage)
     {
-        _ = context.TryGetMessageSourceFeatures(out IFeatureCollection? features);
-        _ = Throw.IfNull(features);
+        _ = Throw.IfNull(context);
 
-        try
-        {
-            queueMessage = features.Get<QueueMessage>();
-            return queueMessage != null;
-        }
-        catch (Exception)
-        {
-            queueMessage = null;
-            return false;
-        }
+        queueMessage = context.SourceFeatures?.Get<QueueMessage>();
+        return queueMessage != null;
     }
 
     /// <summary>
     /// Try to obtain <see cref="TimeSpan"/> representing visibility timeout from the <see cref="MessageContext"/>.
     /// </summary>
-    /// <param name="context"><see cref="MessageContext"/>.</param>
-    /// <param name="visibilityTimeout">The <see langword="out"/> to store the <see cref="TimeSpan"/> representing visibility timeout.</param>
-    /// <returns><see cref="bool"/> and if <see langword="true"/>, a corresponding <see cref="TimeSpan"/> representing visibility timeout.</returns>
+    /// <param name="context">The message context.</param>
+    /// <param name="visibilityTimeout">The optional time span representing the visibility timeout for the message <paramref name="context"/>.</param>
+    /// <returns><see cref="bool"/> and if <see langword="true"/>, a corresponding <see cref="TimeSpan"/> representing the visibility timeout for the message <paramref name="context"/>.</returns>
     /// <exception cref="ArgumentNullException">If the <paramref name="context"/> is null.</exception>
-    [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Handled by Try pattern.")]
-    public static bool TryGetVisibilityTimeout(this MessageContext context, out TimeSpan? visibilityTimeout)
+    public static bool TryGetAzureStorageQueueVisibilityTimeout(this MessageContext context, [NotNullWhen(true)] out TimeSpan? visibilityTimeout)
     {
-        _ = context.TryGetMessageSourceFeatures(out IFeatureCollection? features);
-        _ = Throw.IfNull(features);
+        _ = Throw.IfNullOrMemberNull(context, context?.Features);
 
-        try
-        {
-            IMessageVisibilityDelayFeature? feature = features.Get<IMessageVisibilityDelayFeature>();
-            visibilityTimeout = feature?.VisibilityDelay;
-            return visibilityTimeout != null;
-        }
-        catch (Exception)
-        {
-            visibilityTimeout = null;
-            return false;
-        }
-    }
-
-    /// <summary>
-    /// Sets <see cref="AzureStorageQueueMessageProcessingState"/> in the <see cref="MessageContext"/>.
-    /// </summary>
-    /// <param name="context"><see cref="MessageContext"/>.</param>
-    /// <param name="state"><see cref="AzureStorageQueueMessageProcessingState"/>.</param>
-    /// <exception cref="ArgumentNullException">If the <paramref name="context"/> is null.</exception>
-    public static void SetAzureStorageQueueMessageProcessingState(this MessageContext context, AzureStorageQueueMessageProcessingState state)
-    {
-        _ = Throw.IfNull(context);
-        _ = Throw.IfNull(context.Features);
-
-        context.Features.Set(state);
+        visibilityTimeout = context.Features.Get<IMessageVisibilityDelayFeature>()?.VisibilityDelay;
+        return visibilityTimeout.HasValue;
     }
 
     /// <summary>
     /// Updates visibility timeout for the message in the queue.
     /// </summary>
-    /// <param name="context"><see cref="MessageContext"/>.</param>
+    /// <param name="context">The message context.</param>
     /// <param name="newVisibilityTimeout">The updated message visibility timeout.</param>
-    /// <param name="cancellationToken"><see cref="CancellationToken"/>.</param>
+    /// <param name="cancellationToken">The cancellation token for updating visibility timeout operation.</param>
     /// <returns><see cref="ValueTask"/>.</returns>
-    public static async ValueTask UpdateVisibilityTimeoutAsync(this MessageContext context, TimeSpan newVisibilityTimeout, CancellationToken cancellationToken)
+    /// <exception cref="InvalidOperationException">If no <see cref="IAzureStorageQueueSource"/> is assigned to the provided <paramref name="context"/>.</exception>
+    public static ValueTask UpdateAzureStorageQueueVisibilityTimeoutAsync(this MessageContext context, TimeSpan newVisibilityTimeout, CancellationToken cancellationToken)
     {
         _ = context.TryGetAzureStorageQueueSource(out IAzureStorageQueueSource? queueSource);
-        _ = Throw.IfNull(queueSource);
+        if (queueSource == null)
+        {
+            Throw.InvalidOperationException(ExceptionMessages.NoQueueSourceOnMessageContext);
+        }
 
-        await queueSource.UpdateVisibilityTimeoutAsync(context, newVisibilityTimeout, cancellationToken).ConfigureAwait(false);
+        return queueSource.UpdateVisibilityTimeoutAsync(context, newVisibilityTimeout, cancellationToken);
     }
 }

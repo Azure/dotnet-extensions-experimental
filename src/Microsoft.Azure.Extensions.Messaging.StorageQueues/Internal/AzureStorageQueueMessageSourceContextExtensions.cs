@@ -6,7 +6,6 @@ using System.Cloud.Messaging;
 using System.Diagnostics.CodeAnalysis;
 using Azure.Storage.Queues;
 using Azure.Storage.Queues.Models;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Shared.Diagnostics;
 
 namespace Microsoft.Azure.Extensions.Messaging.StorageQueues.Internal;
@@ -23,22 +22,12 @@ internal static class AzureStorageQueueMessageSourceContextExtensions
     /// <param name="queueSource">The <see langword="out"/> to store the <see cref="IAzureStorageQueueSource"/>.</param>
     /// <returns><see cref="bool"/> and if <see langword="true"/>, a corresponding <see cref="IAzureStorageQueueSource"/>.</returns>
     /// <exception cref="ArgumentNullException">If the <paramref name="context"/> is null.</exception>
-    [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Handled by Try pattern.")]
-    internal static bool TryGetAzureStorageQueueSource(this MessageContext context, out IAzureStorageQueueSource? queueSource)
+    internal static bool TryGetAzureStorageQueueSource(this MessageContext context, [NotNullWhen(true)] out IAzureStorageQueueSource? queueSource)
     {
-        _ = context.TryGetMessageSourceFeatures(out IFeatureCollection? features);
-        _ = Throw.IfNull(features);
+        _ = Throw.IfNull(context);
 
-        try
-        {
-            queueSource = features.Get<IAzureStorageQueueSource>();
-            return queueSource != null;
-        }
-        catch (Exception)
-        {
-            queueSource = null;
-            return false;
-        }
+        queueSource = context.SourceFeatures?.Get<IAzureStorageQueueSource>();
+        return queueSource != null;
     }
 
     /// <summary>
@@ -48,22 +37,12 @@ internal static class AzureStorageQueueMessageSourceContextExtensions
     /// <param name="queueClient">The <see langword="out"/> to store the <see cref="QueueClient"/>.</param>
     /// <returns><see cref="bool"/> and if <see langword="true"/>, a corresponding <see cref="QueueClient"/>.</returns>
     /// <exception cref="ArgumentNullException">If the <paramref name="context"/> is null.</exception>
-    [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Handled by Try pattern.")]
-    internal static bool TryGetAzureStorageQueueClient(this MessageContext context, out QueueClient? queueClient)
+    internal static bool TryGetAzureStorageQueueClient(this MessageContext context, [NotNullWhen(true)] out QueueClient? queueClient)
     {
-        _ = context.TryGetMessageSourceFeatures(out IFeatureCollection? features);
-        _ = Throw.IfNull(features);
+        _ = Throw.IfNull(context);
 
-        try
-        {
-            queueClient = features.Get<QueueClient>();
-            return queueClient != null;
-        }
-        catch (Exception)
-        {
-            queueClient = null;
-            return false;
-        }
+        queueClient = context.SourceFeatures?.Get<QueueClient>();
+        return queueClient != null;
     }
 
     /// <summary>
@@ -74,11 +53,10 @@ internal static class AzureStorageQueueMessageSourceContextExtensions
     /// <exception cref="ArgumentNullException">If any of the arguments is null.</exception>
     internal static void SetAzureStorageQueueClient(this MessageContext context, QueueClient client)
     {
-        _ = context.TryGetMessageSourceFeatures(out IFeatureCollection? sourceFeatures);
-        sourceFeatures ??= new FeatureCollection();
+        _ = Throw.IfNull(context);
+        _ = Throw.IfNull(client);
 
-        sourceFeatures.Set(client);
-        context.SetMessageSourceFeatures(sourceFeatures);
+        context.AddSourceFeature(client);
     }
 
     /// <summary>
@@ -89,12 +67,10 @@ internal static class AzureStorageQueueMessageSourceContextExtensions
     /// <exception cref="ArgumentNullException">If any of the arguments is null.</exception>
     internal static void SetAzureStorageQueueMessage(this MessageContext context, QueueMessage queueMessage)
     {
-        _ = context.TryGetMessageSourceFeatures(out IFeatureCollection? sourceFeatures);
-        sourceFeatures ??= new FeatureCollection();
+        _ = Throw.IfNull(context);
+        _ = Throw.IfNull(queueMessage);
 
-        sourceFeatures.Set(queueMessage);
-        context.SetMessageSourceFeatures(sourceFeatures);
-        context.SetSourcePayload(queueMessage.Body.ToMemory());
+        context.AddSourceFeature(queueMessage);
     }
 
     /// <summary>
@@ -105,10 +81,9 @@ internal static class AzureStorageQueueMessageSourceContextExtensions
     /// <exception cref="ArgumentNullException">If any of the arguments is null.</exception>
     internal static void SetAzureStorageQueueSource(this MessageContext context, IAzureStorageQueueSource queueSource)
     {
-        _ = context.TryGetMessageSourceFeatures(out IFeatureCollection? sourceFeatures);
-        sourceFeatures ??= new FeatureCollection();
+        _ = Throw.IfNull(context);
+        _ = Throw.IfNull(queueSource);
 
-        sourceFeatures.Set(queueSource);
-        context.SetMessageSourceFeatures(sourceFeatures);
+        context.AddSourceFeature(queueSource);
     }
 }

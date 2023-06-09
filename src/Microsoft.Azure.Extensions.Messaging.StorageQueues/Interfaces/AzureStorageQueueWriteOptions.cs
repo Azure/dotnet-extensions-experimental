@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Cloud.Messaging;
 
 namespace Microsoft.Azure.Extensions.Messaging.StorageQueues;
 
@@ -12,20 +13,20 @@ namespace Microsoft.Azure.Extensions.Messaging.StorageQueues;
 public readonly struct AzureStorageQueueWriteOptions
 {
     /// <summary>
-    /// Gets the visibility timeout.
+    /// Gets the visibility timeout indicating when the message would be next available for another <see cref="MessageConsumer"/> to process.
     /// </summary>
     public readonly TimeSpan? VisibilityTimeout { get; }
 
     /// <summary>
-    /// Gets the time to live.
+    /// Gets the time to live for the message.
     /// </summary>
     public readonly TimeSpan? TimeToLive { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AzureStorageQueueWriteOptions"/> struct.
     /// </summary>
-    /// <param name="visibilityTimeout">Visibility Timeout.</param>
-    /// <param name="timeToLive">Time to live.</param>
+    /// <param name="visibilityTimeout"><see cref="VisibilityTimeout"/>.</param>
+    /// <param name="timeToLive"><see cref="TimeToLive"/>.</param>
     public AzureStorageQueueWriteOptions(TimeSpan? visibilityTimeout, TimeSpan? timeToLive)
     {
         VisibilityTimeout = visibilityTimeout;

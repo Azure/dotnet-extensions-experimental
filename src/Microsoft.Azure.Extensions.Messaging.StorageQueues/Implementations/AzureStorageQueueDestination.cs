@@ -12,7 +12,7 @@ using Microsoft.Shared.Diagnostics;
 namespace Microsoft.Azure.Extensions.Messaging.StorageQueues;
 
 /// <summary>
-/// Writes message stream to Azure Storage Queue.
+/// Writes message to Azure Storage Queue.
 /// </summary>
 /// <remarks>
 /// For more information, refer to <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/put-message">Put message</see>.
@@ -25,8 +25,8 @@ public class AzureStorageQueueDestination : IMessageDestination
     /// <summary>
     /// Initializes a new instance of the <see cref="AzureStorageQueueDestination"/> class.
     /// </summary>
-    /// <param name="queueClient"><see cref="QueueClient"/>.</param>
-    /// <param name="writerOptions"><see cref="AzureStorageQueueWriteOptions"/>.</param>
+    /// <param name="queueClient">The queue client.</param>
+    /// <param name="writerOptions">The options for writing message to the Azure Storage Queue.</param>
     public AzureStorageQueueDestination(QueueClient queueClient, AzureStorageQueueWriteOptions writerOptions)
     {
         _queueClient = Throw.IfNull(queueClient);
@@ -36,15 +36,13 @@ public class AzureStorageQueueDestination : IMessageDestination
     /// <inheritdoc/>
     public virtual async ValueTask WriteAsync(MessageContext context)
     {
-        _ = Throw.IfNull(context);
-        _ = context.TryGetDestinationPayload(out ReadOnlyMemory<byte>? message);
-        _ = Throw.IfNull(message);
+        _ = Throw.IfNullOrMemberNull(context, context?.DestinationPayload);
 
-        _ = context.TryGetWriteOptions(out AzureStorageQueueWriteOptions? writeOptions);
+        _ = context.TryGetAzureStorageQueueWriteOptions(out AzureStorageQueueWriteOptions? writeOptions);
         TimeSpan? visibilityTimeoutToUse = writeOptions?.VisibilityTimeout ?? _writerOptions.VisibilityTimeout;
         TimeSpan? timeToLiveToUse = writeOptions?.TimeToLive ?? _writerOptions.TimeToLive;
 
-        Response<SendReceipt> writeResponse = await _queueClient.SendMessageAsync(new BinaryData(message.Value),
+        Response<SendReceipt> writeResponse = await _queueClient.SendMessageAsync(new BinaryData(context.DestinationPayload!.Value),
                                                                                   visibilityTimeoutToUse,
                                                                                   timeToLiveToUse,
                                                                                   context.MessageCancelledToken).ConfigureAwait(false);

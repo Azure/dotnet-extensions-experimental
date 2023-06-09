@@ -5,6 +5,7 @@ using System;
 using System.Cloud.Messaging;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Storage.Queues;
 using Azure.Storage.Queues.Models;
 using Microsoft.AspNetCore.Http.Features;
@@ -21,8 +22,6 @@ namespace Microsoft.Azure.Extensions.Messaging.StorageQueues;
 /// </remarks>
 public class AzureStorageQueueSource : IAzureStorageQueueSource
 {
-    internal const string DoesNotHaveQueueMessageInContext = $"Does not have {nameof(QueueMessage)} in the {nameof(MessageContext)}.";
-
     private readonly QueueClient _queueClient;
     private readonly AzureStorageQueueReadOptions _readOptions;
     private readonly Func<IFeatureCollection> _featureCreator;
@@ -30,9 +29,9 @@ public class AzureStorageQueueSource : IAzureStorageQueueSource
     /// <summary>
     /// Initializes a new instance of the <see cref="AzureStorageQueueSource"/> class.
     /// </summary>
-    /// <param name="queueClient"><see cref="QueueClient"/>.</param>
-    /// <param name="readOptions"><see cref="AzureStorageQueueReadOptions"/>.</param>
-    /// <param name="featureCreator">A function to create a new <see cref="IFeatureCollection"/>.</param>
+    /// <param name="queueClient">The queue client.</param>
+    /// <param name="readOptions">The options for reading message from the Azure Storage Queue.</param>
+    /// <param name="featureCreator">The function to obtain the <see cref="IFeatureCollection"/>.</param>
     public AzureStorageQueueSource(QueueClient queueClient, AzureStorageQueueReadOptions readOptions, Func<IFeatureCollection> featureCreator)
     {
         _queueClient = Throw.IfNull(queueClient);
@@ -41,54 +40,50 @@ public class AzureStorageQueueSource : IAzureStorageQueueSource
     }
 
     /// <inheritdoc/>
-    public async ValueTask DeleteAsync(MessageContext context, CancellationToken cancellationToken)
+    public ValueTask DeleteAsync(MessageContext context, CancellationToken cancellationToken)
     {
         _ = Throw.IfNull(context);
+        if (context is not AzureStorageQueueMessageContext)
+        {
+            Throw.InvalidOperationException(ExceptionMessages.InvalidAzureStorageQueueMessageContext);
+        }
 
-        _ = context.TryGetAzureStorageQueueMessage(out QueueMessage? queueMessage);
-        _ = Throw.IfNull(queueMessage);
-
-        _ = context.TryGetAzureStorageQueueClient(out QueueClient? queueClient);
-        _ = Throw.IfNull(queueClient);
-
-        _ = await queueClient.DeleteMessageAsync(queueMessage.MessageId, queueMessage.PopReceipt, cancellationToken).ConfigureAwait(false);
+        return context.MarkCompleteAsync(cancellationToken);
     }
 
     /// <inheritdoc/>
     public async ValueTask PostponeAsync(MessageContext context, TimeSpan delay, CancellationToken cancellationToken)
     {
         _ = Throw.IfNull(context);
-
-        _ = context.TryGetAzureStorageQueueMessage(out QueueMessage? queueMessage);
-        _ = Throw.IfNull(queueMessage);
-
-        _ = context.TryGetAzureStorageQueueClient(out QueueClient? queueClient);
-        _ = Throw.IfNull(queueClient);
-
-        _ = await queueClient.UpdateMessageAsync(queueMessage.MessageId, queueMessage.PopReceipt, queueMessage.Body, delay, cancellationToken).ConfigureAwait(false);
+        if (context is AzureStorageQueueMessageContext azureStorageQueueMessageContext)
+        {
+            await azureStorageQueueMessageContext.PostponeAsync(delay, cancellationToken).ConfigureAwait(false);
+        }
+        else
+        {
+            Throw.InvalidOperationException(ExceptionMessages.InvalidAzureStorageQueueMessageContext);
+        }
     }
 
     /// <inheritdoc/>
     public async virtual ValueTask<MessageContext> ReadAsync(CancellationToken cancellationToken)
     {
-        var readMessage = await _queueClient.ReceiveMessageAsync(_readOptions.VisibilityTimeout, cancellationToken).ConfigureAwait(false);
-        var queueMessage = readMessage.Value;
+        Response<QueueMessage>? readMessage = await _queueClient.ReceiveMessageAsync(_readOptions.VisibilityTimeout, cancellationToken).ConfigureAwait(false);
+        QueueMessage? queueMessage = readMessage?.Value;
+
+        if (queueMessage == null)
+        {
+            Throw.InvalidOperationException(ExceptionMessages.NoQueueMessageRetrieved);
+        }
 
         // A more efficient implementation will use the Features from the pool.
         IFeatureCollection features = _featureCreator();
-        MessageContext context = new(features);
-
-        IFeatureCollection sourceFeatures = _featureCreator();
-        context.SetMessageSourceFeatures(sourceFeatures);
+        AzureStorageQueueMessageContext context = new(_queueClient, queueMessage!, features, queueMessage!.Body.ToMemory());
 
         context.SetAzureStorageQueueClient(_queueClient);
         context.SetAzureStorageQueueMessage(queueMessage);
         context.SetAzureStorageQueueSource(this);
-
-        AzureStorageQueueMessageActionFeature provider = new(context);
-        context.SetMessageCompleteActionFeature(provider);
-        context.SetMessagePostponeActionFeature(provider);
-
+        context.SetMessagePostponeFeature(context);
         return context;
     }
 

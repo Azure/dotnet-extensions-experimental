@@ -4,55 +4,39 @@
 using System;
 using System.Cloud.Messaging;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Shared.Diagnostics;
 
 namespace Microsoft.Azure.Extensions.Messaging.StorageQueues;
 
 /// <summary>
-/// Extension methods for <see cref="MessageContext"/>.
+/// Provides extension methods for <see cref="MessageContext"/> to add support for Azure Storage Queue based <see cref="IMessageDestination"/>.
 /// </summary>
 public static class AzureStorageQueueMessageDestinationContextExtensions
 {
     /// <summary>
     /// Sets the <see cref="AzureStorageQueueWriteOptions"/> in the <see cref="MessageContext"/>.
     /// </summary>
-    /// <param name="context"><see cref="MessageContext"/>.</param>
-    /// <param name="writeOptions"><see cref="AzureStorageQueueWriteOptions"/>.</param>
+    /// <param name="context">The message context.</param>
+    /// <param name="writeOptions">The options for writing message to the Azure Storage Queue.</param>
     /// <exception cref="ArgumentNullException">If any of the parameters is null.</exception>
-    public static void SetWriteOptions(this MessageContext context, AzureStorageQueueWriteOptions writeOptions)
+    public static void SetAzureStorageQueueWriteOptions(this MessageContext context, AzureStorageQueueWriteOptions writeOptions)
     {
-        _ = Throw.IfNull(writeOptions);
-
-        _ = context.TryGetMessageDestinationFeatures(out IFeatureCollection? destinationFeatures);
-        destinationFeatures ??= new FeatureCollection();
-
-        destinationFeatures.Set(writeOptions);
-        context.SetMessageDestinationFeatures(destinationFeatures);
+        _ = Throw.IfNull(context);
+        context.AddDestinationFeature<AzureStorageQueueWriteOptions?>(writeOptions);
     }
 
     /// <summary>
     /// Gets the <see cref="AzureStorageQueueWriteOptions"/> from <see cref="MessageContext"/>.
     /// </summary>
-    /// <param name="context"><see cref="MessageContext"/>.</param>
-    /// <param name="writeOptions"><see cref="AzureStorageQueueWriteOptions"/>.</param>
-    /// <returns><see cref="bool"/> value indicating if writeOptions is populated or not.</returns>
+    /// <param name="context">The message context.</param>
+    /// <param name="writeOptions">The optional options for writing message to the Azure Storage Queue.</param>
+    /// <returns><see cref="bool"/> value and if <see langword="true"/>, a corresponding options for writing to the Azure Storage Queue.</returns>
     /// <exception cref="ArgumentNullException">If the <paramref name="context"/> is null.</exception>
-    [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "TryGet Pattern.")]
-    public static bool TryGetWriteOptions(this MessageContext context, out AzureStorageQueueWriteOptions? writeOptions)
+    public static bool TryGetAzureStorageQueueWriteOptions(this MessageContext context, [NotNullWhen(true)] out AzureStorageQueueWriteOptions? writeOptions)
     {
-        _ = context.TryGetMessageDestinationFeatures(out IFeatureCollection? features);
-        _ = Throw.IfNull(features);
+        _ = Throw.IfNull(context);
 
-        try
-        {
-            writeOptions = features.Get<AzureStorageQueueWriteOptions>();
-            return writeOptions.HasValue;
-        }
-        catch (Exception)
-        {
-            writeOptions = null;
-            return false;
-        }
+        writeOptions = context.DestinationFeatures?.Get<AzureStorageQueueWriteOptions?>();
+        return writeOptions.HasValue;
     }
 }
