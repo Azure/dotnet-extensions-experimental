@@ -22,7 +22,7 @@
     <PackageVersion Include="Microsoft.Extensions.Telemetry" Version="$(MicrosoftExtensionsTelemetryVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Telemetry.Abstractions" Version="$(MicrosoftExtensionsTelemetryAbstractionsVersion)" />
     <PackageVersion Include="System.Cloud.DocumentDb.Abstractions" Version="$(SystemCloudDocumentDbAbstractionsVersion)" />
-    <PackageVersion Include="System.Cloud.Messaging.Abstractions" Version="$(SystemCloudMessagingAbstractionsVersion)" />
+    <PackageVersion Include="System.Cloud.Messaging" Version="$(SystemCloudMessagingVersion)" />
     <PackageVersion Include="System.Text.Json" Version="$(SystemTextJsonVersion)" />
 
     <!-- Manual dependencies -->

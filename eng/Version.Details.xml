@@ -60,6 +60,10 @@
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>bf7fb2ecbf69deb6a73bb8bbca1e56e7beec8d8a</Sha>
     </Dependency>
+    <Dependency Name="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0-preview.6.23307.20" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+      <Uri>https://github.com/dotnet/aspnetcore</Uri>
+      <Sha>abf68d8e609527d0953d1cb44a7f1b392dda795a</Sha>
+    </Dependency>
     <Dependency Name="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0-preview.6.23307.20" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/aspnetcore</Uri>
       <Sha>abf68d8e609527d0953d1cb44a7f1b392dda795a</Sha>
@@ -124,8 +128,8 @@
       <Uri>https://github.com/dotnet/extensions</Uri>
       <Sha>4ae7f494fd700c776d8f1294391b91144d602360</Sha>
     </Dependency>
-    <Dependency Name="System.Cloud.Messaging.Abstractions" Version="8.0.0-alpha.1.23271.10">
-      <Uri>https://github.com/dotnet/r9</Uri>
+    <Dependency Name="System.Cloud.Messaging" Version="8.0.0-preview.6.23308.1">
+      <Uri>https://github.com/dotnet/extensions</Uri>
       <Sha>85e4673db72383ee4dd8046d5fa64ab7a89ae290</Sha>
     </Dependency>
   </ProductDependencies>

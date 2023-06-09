@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Queues" />
     <PackageReference Include="Microsoft.Extensions.EnumStrings" />
-    <PackageReference Include="System.Cloud.Messaging.Abstractions" />
+    <PackageReference Include="System.Cloud.Messaging" />
   </ItemGroup>
 
   <ItemGroup>

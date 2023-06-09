@@ -40,7 +40,7 @@
     <MicrosoftExtensionsTimeProviderTestingVersion>8.0.0-preview.6.23308.1</MicrosoftExtensionsTimeProviderTestingVersion>
     <MicrosoftExtensionsOptionsValidateOnStartVersion>8.0.0-preview.6.23308.1</MicrosoftExtensionsOptionsValidateOnStartVersion>
     <SystemCloudDocumentDbAbstractionsVersion>8.0.0-preview.6.23308.1</SystemCloudDocumentDbAbstractionsVersion>
-    <SystemCloudMessagingAbstractionsVersion>8.0.0-alpha.1.23271.10</SystemCloudMessagingAbstractionsVersion>
+    <SystemCloudMessagingVersion>8.0.0-preview.6.23308.1</SystemCloudMessagingVersion>
     <!-- Dependencies from https://github.com/dotnet/runtime -->
     <MicrosoftBclTimeProviderVersion>8.0.0-preview.6.23280.5</MicrosoftBclTimeProviderVersion>
     <MicrosoftExtensionsConfigurationAbstractionsVersion>8.0.0-preview.6.23280.5</MicrosoftExtensionsConfigurationAbstractionsVersion>
@@ -58,7 +58,7 @@
     <MicrosoftExtensionsPrimitivesVersion>8.0.0-preview.6.23280.5</MicrosoftExtensionsPrimitivesVersion>
     <SystemTextJsonVersion>8.0.0-preview.6.23280.5</SystemTextJsonVersion>
     <!-- Dependencies from https://github.com/aspnet/AspNetCore -->
-    <MicrosoftAspNetCoreMvcTestingVersion>8.0.0-preview.5.23268.15</MicrosoftAspNetCoreMvcTestingVersion>
+    <MicrosoftAspNetCoreMvcTestingVersion>8.0.0-preview.6.23307.20</MicrosoftAspNetCoreMvcTestingVersion>
     <MicrosoftExtensionsDiagnosticsHealthChecksVersion>8.0.0-preview.6.23307.20</MicrosoftExtensionsDiagnosticsHealthChecksVersion>
   </PropertyGroup>
   <!--
