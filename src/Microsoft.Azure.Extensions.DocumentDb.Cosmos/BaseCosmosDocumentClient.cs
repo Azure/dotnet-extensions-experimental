@@ -4,6 +4,7 @@
 using System;
 using System.Cloud.DocumentDb;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -183,55 +184,11 @@ internal class BaseCosmosDocumentClient<TDocument> :
         }
 
         var iterator = cosmosDatabase.CosmosEncryptionProvider
-            ?.ToEncryptionStreamIterator(cosmosContainer, queryable)
-            ?? queryable.ToStreamIterator();
+            ?.ToEncryptionFeedIterator(cosmosContainer, queryable)
+            ?? queryable.ToFeedIterator();
 
-        List<TOutputDocument> results = new();
-        HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
-        string? continuationToken = null;
-        FetchMode fetchCondition = request.FetchCondition;
-        double totalCost = 0;
-
-        while (iterator.HasMoreResults)
-        {
-            using (ResponseMessage responseMessage = await iterator
-                .ReadNextAsync(cancellationToken).ConfigureAwait(false))
-            {
-                _ = responseMessage.EnsureSuccessStatusCode();
-
-                totalCost += responseMessage.Headers.RequestCharge;
-                continuationToken = responseMessage.ContinuationToken;
-
-                DocumentArray<TOutputDocument> pageResults = cosmosDatabase.Configuration.CosmosSerializer
-                    .FromStream<DocumentArray<TOutputDocument>>(responseMessage.Content);
-
-                // `pageResults` is not checked for null, below despite serializer implementation can return `null`.
-                // That is done because in normal flows, `responseMessage.Content` is never null for success cases.
-                // So that this branch can not be tested.
-                // And above behavior can not be mocked since getting iterator uses external static extensions.
-                if (pageResults.Documents != null)
-                {
-                    results.AddRange(pageResults.Documents);
-                }
-
-                statusCode = responseMessage.StatusCode;
-            }
-
-            if (fetchCondition == FetchMode.FetchSinglePage ||
-               (fetchCondition == FetchMode.FetchMaxResults && results.Count >= queryRequestOptions.MaxItemCount))
-            {
-                break;
-            }
-        }
-
-        var response = request.ToDatabaseResponse(
-            results,
-            container.Options.TableName,
-            statusCode,
-            continuationToken,
-            cosmosDatabase.Database.Client.Endpoint,
-            totalCost);
-        return response;
+        var result = await ReadFeedIteratorAsync(request, cosmosContainer, iterator, cancellationToken).ConfigureAwait(false);
+        return result;
     }
 
     /// <inheritdoc/>
@@ -241,7 +198,6 @@ internal class BaseCosmosDocumentClient<TDocument> :
         CancellationToken cancellationToken)
     {
         var container = await GetContainerAsync(request, cancellationToken).ConfigureAwait(false);
-        FetchMode fetchCondition = request.FetchCondition;
         QueryRequestOptions queryRequestOptions = request.GetQueryRequestOptions();
         QueryDefinition queryDefinition = new QueryDefinition(query.QueryText);
 
@@ -255,14 +211,26 @@ internal class BaseCosmosDocumentClient<TDocument> :
                 request.ContinuationToken,
                 queryRequestOptions);
 
-        List<TDocument> results = new();
+        var result = await ReadFeedIteratorAsync(request, container, feedIterator, cancellationToken).ConfigureAwait(false);
+        return result;
+    }
+
+    private static async Task<IDatabaseResponse<IReadOnlyList<TOutputDocument>>> ReadFeedIteratorAsync<TOutputDocument>(
+            QueryRequestOptions<TDocument> request,
+            Container container,
+            FeedIterator<TOutputDocument> feedIterator,
+            CancellationToken cancellationToken)
+        where TOutputDocument : notnull
+    {
+        FetchMode fetchCondition = request.FetchCondition;
+        List<TOutputDocument> results = new();
         HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
         string? continuationToken = null;
         double totalCost = 0;
 
         while (feedIterator.HasMoreResults)
         {
-            FeedResponse<TDocument> feedResponse = await feedIterator
+            FeedResponse<TOutputDocument> feedResponse = await feedIterator
                 .ReadNextAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -272,10 +240,18 @@ internal class BaseCosmosDocumentClient<TDocument> :
             statusCode = feedResponse.StatusCode;
 
             if (fetchCondition == FetchMode.FetchSinglePage ||
-               (fetchCondition == FetchMode.FetchMaxResults && results.Count >= queryRequestOptions.MaxItemCount))
+                (fetchCondition == FetchMode.FetchMaxResults &&
+                    results.Count >= request.MaxResults))
             {
                 break;
             }
+        }
+
+        if (!feedIterator.HasMoreResults)
+        {
+            // Normally it is already `null` at this case.
+            // But if fetched exactly max items, Cosmos DB may return not null token.
+            continuationToken = null;
         }
 
         var response = request.ToDatabaseResponse(
@@ -289,6 +265,9 @@ internal class BaseCosmosDocumentClient<TDocument> :
     }
 
     /// <inheritdoc/>
+    [SuppressMessage("StyleCop.CSharp.OrderingRules",
+        "SA1202:Elements should be ordered by access",
+        Justification = "The private method extracted from public above it, should be there for easier review dif. Can be moved in next PR.")]
     public virtual async Task<IDatabaseResponse<TDocument>> InsertOrUpdateDocumentAsync(
         RequestOptions<TDocument> request,
         string id,

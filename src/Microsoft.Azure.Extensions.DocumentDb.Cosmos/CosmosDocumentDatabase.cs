@@ -129,8 +129,18 @@ Otherwise use {nameof(DatabaseBuilder.EnableTableLocator)} to configure the loca
     }
 
     /// <summary>
-    /// This method cleans up system trace listeners created by Cosmos Client on creation.
+    /// This method clean up system trace listeners created by Cosmos Client on creation.
     /// </summary>
+    /// <remarks>
+    /// Those listeners are not a lock free at Cosmos, and generating lock contentions across threads when any listener assigned.
+    /// The issue is, even if a customer not assigns any listeners, .Net SDK adds one default listener.
+    /// That is why those should be cleaned up in all cases.
+    /// [Cosmos Issue 892](https://github.com/Azure/azure-cosmos-dotnet-v3/issues/892).
+    /// [Cosmos Issue 2240](https://github.com/Azure/azure-cosmos-dotnet-v3/issues/2240).
+    /// [MS Teams investigation results](https://domoreexp.visualstudio.com/MSTeams/_workitems/edit/2088401/).
+    /// How cosmos team removes them internally for own [benchmark tests]
+    /// (https://github.com/Azure/azure-cosmos-dotnet-v3/blob/88f3f4314dabde8a6eda5d72e0380fd59da12883/Microsoft.Azure.Cosmos.Samples/Tools/Benchmark/Program.cs#L246-L252).
+    /// </remarks>
     [DynamicDependency(DynamicallyAccessedMemberTypes.All, "Microsoft.Azure.Cosmos.Core.Trace.DefaultTrace", "Microsoft.Azure.Cosmos.Direct")]
     [UnconditionalSuppressMessage(
         "Trimming",
@@ -274,8 +284,7 @@ Otherwise use {nameof(DatabaseBuilder.EnableTableLocator)} to configure the loca
 
         string endpoint = config.Endpoint.ToString();
         CosmosClientBuilder clientBuilder = new CosmosClientBuilder(endpoint, config.PrimaryKey)
-            .WithApplicationPreferredRegions(config.FailoverRegions)
-            .WithCustomSerializer(config.CosmosSerializer);
+            .WithApplicationPreferredRegions(config.FailoverRegions);
 
         if (config.EnableGatewayMode
 #if NETCOREAPP3_1_OR_GREATER
@@ -296,6 +305,11 @@ Otherwise use {nameof(DatabaseBuilder.EnableTableLocator)} to configure the loca
                     config.IdleTcpConnectionTimeout,
                     portReuseMode: portReuseMode,
                     enableTcpConnectionEndpointRediscovery: config.EnableTcpEndpointRediscovery);
+        }
+
+        if (config.CosmosSerializer != null)
+        {
+            clientBuilder = clientBuilder.WithCustomSerializer(config.CosmosSerializer);
         }
 
         CosmosClient cosmosClient = clientBuilder.Build();

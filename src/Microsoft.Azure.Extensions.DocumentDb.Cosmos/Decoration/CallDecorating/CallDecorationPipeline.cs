@@ -33,8 +33,6 @@ internal readonly struct CallDecorationPipeline<TContext> : ICallDecorationPipel
         Func<Exception, T> exceptionHandler,
         CancellationToken cancellationToken)
     {
-#pragma warning disable R9A034 // Optimize method group use to avoid allocations
         return _call.OnCallAsync(_pipeline.DoCallAsync, functionToCall, context, exceptionHandler, cancellationToken);
-#pragma warning restore R9A034 // Optimize method group use to avoid allocations
     }
 }

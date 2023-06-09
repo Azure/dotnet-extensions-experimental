@@ -78,7 +78,7 @@ internal sealed class CosmosDatabaseConfiguration
     /// <summary>
     /// Gets a cosmos serializer.
     /// </summary>
-    internal CosmosSerializer CosmosSerializer { get; }
+    internal CosmosSerializer? CosmosSerializer { get; }
 
     /// <summary>
     /// Gets a value of database throughput.
@@ -100,7 +100,6 @@ internal sealed class CosmosDatabaseConfiguration
     {
     }
 
-#pragma warning disable S3236 // Caller information arguments should not be provided explicitly
     internal CosmosDatabaseConfiguration(string region, DatabaseOptions options, RegionalDatabaseOptions regionalOptions)
         : this(options,
               InternalThrows.IfNullOrWhitespace(regionalOptions.DatabaseName ?? options.DefaultRegionalDatabaseName,
@@ -129,7 +128,11 @@ internal sealed class CosmosDatabaseConfiguration
         EnablePrivatePortPool = cosmosOptions?.EnablePrivatePortPool ?? true;
         EnableTcpEndpointRediscovery = cosmosOptions?.EnableTcpEndpointRediscovery ?? true;
 
-        CosmosSerializer = new CosmosSystemTextJsonSerializer(options.JsonSerializerOptions);
+        //// Port https://domoreexp.visualstudio.com/R9/_git/SDK/pullrequest/717109?
+        ////if (options.OverrideSerialization)
+        ////{
+        ////    CosmosSerializer = new CosmosSystemTextJsonSerializer(options.JsonSerializerOptions);
+        ////}
     }
 
     internal static CosmosDatabaseConfiguration GetGlobalConfiguration(DatabaseOptions options)

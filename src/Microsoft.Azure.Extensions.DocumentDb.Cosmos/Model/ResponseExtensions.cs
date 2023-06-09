@@ -4,7 +4,6 @@
 using System;
 using System.Cloud.DocumentDb;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Extensions.Document.Cosmos.Model;
@@ -61,14 +60,14 @@ public static class ResponseExtensions
             rawResponse: response);
 
     internal static CosmosDatabaseResponse<T> ToDatabaseResponse<T>(
-        this TransactionalBatchOperationResult response,
+        this TransactionalBatchOperationResult<T> response,
         CosmosTable container,
         string? region,
         Uri endpoint)
         where T : notnull
         => new(response.GetRequest(container.Options.TableName, region, endpoint),
             response.StatusCode,
-            container.Database.Configuration.CosmosSerializer.FromStream<T>(response.ResourceStream),
+            response.Resource,
             response.ETag,
             rawResponse: response);
 
@@ -78,13 +77,23 @@ public static class ResponseExtensions
         string? region,
         Uri endpoint)
         where T : notnull
-        => CosmosDatabaseResponse<IReadOnlyList<T>>.MakeResponseFromList(
+    {
+        List<IDatabaseResponse<T>> results = new(response.Count);
+
+        for (int resultIndex = 0; resultIndex < response.Count; ++resultIndex)
+        {
+            var rawResult = response.GetOperationResultAtIndex<T>(resultIndex);
+            IDatabaseResponse<T> result = rawResult.ToDatabaseResponse(container, region, endpoint);
+            results.Add(result);
+        }
+
+        var aggregatedResult = CosmosDatabaseResponse<IReadOnlyList<T>>.MakeResponseFromList(
             response.GetRequest(container.Options.TableName, region, endpoint),
             response.StatusCode,
-            (response.Select(result => result.ToDatabaseResponse<T>(container, region, endpoint))
-                .ToList() as IReadOnlyList<IDatabaseResponse<T>>)
-                .EmptyIfNull(),
+            ((IReadOnlyList<IDatabaseResponse<T>>)results).EmptyIfNull(),
             rawResponse: response);
+        return aggregatedResult;
+    }
 
     internal static CosmosDatabaseResponse<TableOptions> ToDatabaseResponse(
         this Response<ContainerProperties> response,

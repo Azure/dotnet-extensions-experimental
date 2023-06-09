@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,5 +56,19 @@ public interface ICosmosEncryptionProvider
     /// <param name="container">The cosmos container.</param>
     /// <param name="queryable">The queryable to convert.</param>
     /// <returns>The feed iterator.</returns>
+    [Experimental]
+    FeedIterator<TDocument> ToEncryptionFeedIterator<TDocument>(Container container, IQueryable<TDocument> queryable);
+
+    /// <summary>
+    /// Converts queryable to encrypted stream iterator.
+    /// </summary>
+    /// <typeparam name="TDocument">
+    /// The document entity type to be used as a container schema.
+    /// Operation results from database will be mapped to instance of this type.
+    /// </typeparam>
+    /// <param name="container">The cosmos container.</param>
+    /// <param name="queryable">The queryable to convert.</param>
+    /// <returns>The feed iterator.</returns>
+    [Obsolete("Deprecated since 1.28.0. Use ToEncryptionFeedIterator instead.")]
     FeedIterator ToEncryptionStreamIterator<TDocument>(Container container, IQueryable<TDocument> queryable);
 }
