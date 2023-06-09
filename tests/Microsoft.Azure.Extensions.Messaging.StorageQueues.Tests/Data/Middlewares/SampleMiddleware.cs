@@ -4,24 +4,27 @@
 using System;
 using System.Cloud.Messaging;
 using System.Threading.Tasks;
+using Microsoft.Shared.Diagnostics;
 
 namespace Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Data.Middlewares;
 
 internal class SampleMiddleware : IMessageMiddleware
 {
-    private readonly IMessageDelegate _messageDelegate;
+    private readonly MessageDelegate _messageDelegate;
 
-    public SampleMiddleware(IMessageDelegate messageDelegate)
+    public SampleMiddleware(MessageDelegate messageDelegate)
     {
-        _messageDelegate = messageDelegate;
+        _messageDelegate = Throw.IfNull(messageDelegate);
     }
 
     /// <inheritdoc/>
-    public async ValueTask InvokeAsync(MessageContext context, IMessageDelegate nextHandler)
+    public async ValueTask InvokeAsync(MessageContext context, MessageDelegate nextHandler)
     {
-        await _messageDelegate.InvokeAsync(context).ConfigureAwait(false);
+        await _messageDelegate.Invoke(context).ConfigureAwait(false);
 
-        await context.UpdateVisibilityTimeoutAsync(TimeSpan.FromSeconds(10), context.MessageCancelledToken).ConfigureAwait(false);
-        await nextHandler.InvokeAsync(context).ConfigureAwait(false);
+        await context.UpdateAzureStorageQueueVisibilityTimeoutAsync(TimeSpan.FromSeconds(10), context.MessageCancelledToken).ConfigureAwait(false);
+
+        _ = Throw.IfNull(nextHandler);
+        await nextHandler.Invoke(context).ConfigureAwait(false);
     }
 }

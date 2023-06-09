@@ -3,30 +3,29 @@
 
 using System.Cloud.Messaging;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Data.Delegates;
 
-internal class SampleWriterDelegate : IMessageDelegate
+internal class SampleWriterDelegate
 {
-    private readonly IMessageDelegate _messageDelegate;
+    private readonly MessageDelegate _messageDelegate;
     private readonly AzureStorageQueueDestination _messageDestination;
 
-    public SampleWriterDelegate(IMessageDelegate messageDelegate, AzureStorageQueueDestination messageDestination)
+    public SampleWriterDelegate(MessageDelegate messageDelegate, AzureStorageQueueDestination messageDestination)
     {
         _messageDelegate = messageDelegate;
         _messageDestination = messageDestination;
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// The <see cref="MessageDelegate"/> implementation.
+    /// </summary>
     public async ValueTask InvokeAsync(MessageContext context)
     {
-        await _messageDelegate.InvokeAsync(context);
+        await _messageDelegate.Invoke(context).ConfigureAwait(false);
+        context.SetDestinationPayload(context.SourcePayload);
 
-        context.SetMessageDestinationFeatures(new FeatureCollection());
-        context.SetDestinationPayload(context.GetSourcePayload());
-
-        await _messageDestination.WriteAsync(context);
+        await _messageDestination.WriteAsync(context).ConfigureAwait(false);
         context.SetAzureStorageQueueMessageProcessingState(AzureStorageQueueMessageProcessingState.Completed);
     }
 }

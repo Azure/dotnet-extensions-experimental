@@ -20,12 +20,8 @@ namespace Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Implementatio
 /// </summary>
 public class AzureStorageQueueSourceTests
 {
-    private static MessageContext CreateContext()
-    {
-        var context = new MessageContext(new FeatureCollection());
-        context.SetMessageSourceFeatures(new FeatureCollection());
-        return context;
-    }
+    private static MessageContext CreateContext(QueueClient queueClient, QueueMessage queueMessage)
+        => new AzureStorageQueueMessageContext(queueClient, queueMessage, new FeatureCollection(), ReadOnlyMemory<byte>.Empty);
 
     [Theory]
     [InlineData(1)]
@@ -54,7 +50,7 @@ public class AzureStorageQueueSourceTests
         QueueMessage queueMessage = QueuesModelFactory.QueueMessage(messageId, popReceipt, message, dequeueCount);
         var mockQueueClient = new Mock<QueueClient>();
 
-        MessageContext messageContext = CreateContext();
+        MessageContext messageContext = CreateContext(mockQueueClient.Object, queueMessage);
         messageContext.SetAzureStorageQueueMessage(queueMessage);
         messageContext.SetAzureStorageQueueClient(mockQueueClient.Object);
 
@@ -76,7 +72,7 @@ public class AzureStorageQueueSourceTests
         var messageSource = new AzureStorageQueueSource(mockQueueClient.Object, default, () => features);
         TimeSpan newVisibilityTimeout = TimeSpan.FromSeconds(newVisibilityTimeoutInSeconds);
 
-        MessageContext messageContext = CreateContext();
+        MessageContext messageContext = CreateContext(mockQueueClient.Object, queueMessage);
         messageContext.SetAzureStorageQueueMessage(queueMessage);
         messageContext.SetAzureStorageQueueClient(mockQueueClient.Object);
 
@@ -85,14 +81,13 @@ public class AzureStorageQueueSourceTests
     }
 
     [Theory]
-    [InlineData("msgId-1", "popReceipt-1", "message-1", 1, 5, false)]
-    [InlineData("msgId-2", "popReceipt-2", "message-2", 2, 10, true)]
+    [InlineData("msgId-1", "popReceipt-1", "message-1", 1, 5)]
+    [InlineData("msgId-2", "popReceipt-2", "message-2", 2, 10)]
     public async Task MessageUpdateVisibilityTime_ShouldCallUnderlyingQueueClientUpdateMessage(string messageId,
                                                                                                string popReceipt,
                                                                                                string message,
                                                                                                int dequeueCount,
-                                                                                               int newVisibilityTimeoutInSeconds,
-                                                                                               bool existingCancellationTokenSource)
+                                                                                               int newVisibilityTimeoutInSeconds)
     {
         QueueMessage queueMessage = QueuesModelFactory.QueueMessage(messageId, popReceipt, BinaryData.FromString(message), dequeueCount);
         var mockQueueClient = new Mock<QueueClient>();
@@ -101,38 +96,11 @@ public class AzureStorageQueueSourceTests
         var messageSource = new AzureStorageQueueSource(mockQueueClient.Object, default, () => features);
         TimeSpan newVisibilityTimeout = TimeSpan.FromSeconds(newVisibilityTimeoutInSeconds);
 
-        MessageContext messageContext = CreateContext();
+        MessageContext messageContext = CreateContext(mockQueueClient.Object, queueMessage);
         messageContext.SetAzureStorageQueueMessage(queueMessage);
         messageContext.SetAzureStorageQueueClient(mockQueueClient.Object);
 
-        using var cts = new CancellationTokenSource();
-        if (existingCancellationTokenSource)
-        {
-            messageContext.SetMessageCancelledTokenSource(cts);
-        }
-
         await messageSource.UpdateVisibilityTimeoutAsync(messageContext, newVisibilityTimeout, CancellationToken.None);
         mockQueueClient.Verify(x => x.UpdateMessageAsync(queueMessage.MessageId, queueMessage.PopReceipt, queueMessage.Body, newVisibilityTimeout, It.IsAny<CancellationToken>()), Times.Once);
-    }
-
-    [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
-    public void MessageRelease_ShouldCancelUnderlyingCancellationTokenSourceIfPresent(bool existingCancellationTokenSource)
-    {
-        using var cts = new CancellationTokenSource();
-
-        MessageContext messageContext = CreateContext();
-        if (existingCancellationTokenSource)
-        {
-            messageContext.SetMessageCancelledTokenSource(cts);
-        }
-
-        var features = new FeatureCollection();
-        var mockQueueClient = new Mock<QueueClient>();
-        var messageSource = new AzureStorageQueueSource(mockQueueClient.Object, default, () => features);
-
-        messageSource.Release(messageContext);
-        mockQueueClient.VerifyNoOtherCalls();
     }
 }

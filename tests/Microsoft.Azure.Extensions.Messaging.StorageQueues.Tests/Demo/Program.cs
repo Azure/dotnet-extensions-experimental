@@ -6,7 +6,9 @@ using System.Cloud.Messaging;
 using System.Collections.Generic;
 using Azure.Storage.Queues;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Data;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Testing;
 using Microsoft.Extensions.Logging;
@@ -22,6 +24,7 @@ public static class Program
         var builder = FakeHost.CreateBuilder();
         builder.ConfigureServices(services =>
         {
+            services.TryAddSingleton<PassThroughMiddleware>();
             ProducerQueue("ProducerQueue", services);
             QueueConsumer("QueueConsumer", services);
             QueueConsumerQueue("QueueConsumerQueue", services);
@@ -61,14 +64,12 @@ public static class Program
                     var readOptions = new AzureStorageQueueReadOptions(TimeSpan.FromSeconds(1));
                     return new AzureStorageQueueSource(queueClient, readOptions, () => new FeatureCollection());
                 })
-                .ConfigureTerminalMessageDelegate(_ => new ReadOnlyMessageDelegate())
-                .ConfigureMessageConsumer(sp =>
-                {
-                    var messageSource = sp.GetRequiredService<INamedServiceProvider<IMessageSource>>().GetRequiredService(pipelineName);
-                    var pipelineDelegate = sp.GetRequiredService<INamedServiceProvider<IMessageDelegate>>().GetRequiredService(pipelineName);
-                    var logger = sp.GetRequiredService<INamedServiceProvider<ILogger>>().GetRequiredService(pipelineName);
-                    return new MessageConsumer(messageSource, pipelineDelegate, logger);
-                })
+                .AddMessageMiddleware<PassThroughMiddleware>()
+                .ConfigureTerminalMessageDelegate(_ => ReadOnlyMessageDelegate.InvokeAsync)
+                .ConfigureMessageConsumer(sp => new DemoMessageConsumer(sp.GetMessageSource(pipelineName),
+                                                                        sp.GetMessageMiddlewares(pipelineName),
+                                                                        sp.GetMessageDelegate(pipelineName),
+                                                                        sp.GetRequiredService<ILogger>()))
                 .RunConsumerAsBackgroundService();
     }
 
@@ -96,18 +97,16 @@ public static class Program
                     var writeOptions = new AzureStorageQueueWriteOptions(TimeSpan.FromMinutes(1), TimeSpan.FromDays(1));
                     return new AzureStorageQueueDestination(queueClient, writeOptions);
                 })
+                .AddMessageMiddleware<PassThroughMiddleware>()
                 .ConfigureTerminalMessageDelegate(sp =>
                 {
                     var messageDestination = sp.GetRequiredService<INamedServiceProvider<IMessageDestination>>().GetRequiredService(pipelineName);
-                    return new SingleDestinationMessageDelegate(messageDestination);
+                    return new SingleDestinationMessageDelegate(messageDestination).InvokeAsync;
                 })
-                .ConfigureMessageConsumer(sp =>
-                {
-                    var messageSource = sp.GetRequiredService<INamedServiceProvider<IMessageSource>>().GetRequiredService(pipelineName);
-                    var pipelineDelegate = sp.GetRequiredService<INamedServiceProvider<IMessageDelegate>>().GetRequiredService(pipelineName);
-                    var logger = sp.GetRequiredService<INamedServiceProvider<ILogger>>().GetRequiredService(pipelineName);
-                    return new MessageConsumer(messageSource, pipelineDelegate, logger);
-                })
+                .ConfigureMessageConsumer(sp => new DemoMessageConsumer(sp.GetMessageSource(pipelineName),
+                                                                        sp.GetMessageMiddlewares(pipelineName),
+                                                                        sp.GetMessageDelegate(pipelineName),
+                                                                        sp.GetRequiredService<ILogger>()))
                 .RunConsumerAsBackgroundService();
     }
 
@@ -131,6 +130,7 @@ public static class Program
                     var readOptions = new AzureStorageQueueReadOptions(TimeSpan.FromSeconds(1));
                     return new AzureStorageQueueSource(queueClient, readOptions, () => new FeatureCollection());
                 })
+                .AddMessageMiddleware<PassThroughMiddleware>()
                 .ConfigureMessageDestination(destination1, sp =>
                 {
                     var queueClient = sp.GetRequiredService<INamedServiceProvider<QueueClient>>().GetRequiredService(destination1);
@@ -147,15 +147,12 @@ public static class Program
                 {
                     var messageDestination1 = sp.GetRequiredService<INamedServiceProvider<IMessageDestination>>().GetRequiredService(destination1);
                     var messageDestination2 = sp.GetRequiredService<INamedServiceProvider<IMessageDestination>>().GetRequiredService(destination2);
-                    return new MultipleDestinationMessageDelegate(new List<IMessageDestination> { messageDestination1, messageDestination2 });
+                    return new MultipleDestinationMessageDelegate(new List<IMessageDestination> { messageDestination1, messageDestination2 }).InvokeAsync;
                 })
-                .ConfigureMessageConsumer(sp =>
-                {
-                    var messageSource = sp.GetRequiredService<INamedServiceProvider<IMessageSource>>().GetRequiredService(pipelineName);
-                    var pipelineDelegate = sp.GetRequiredService<INamedServiceProvider<IMessageDelegate>>().GetRequiredService(pipelineName);
-                    var logger = sp.GetRequiredService<INamedServiceProvider<ILogger>>().GetRequiredService(pipelineName);
-                    return new MessageConsumer(messageSource, pipelineDelegate, logger);
-                })
+                .ConfigureMessageConsumer(sp => new DemoMessageConsumer(sp.GetMessageSource(pipelineName),
+                                                                        sp.GetMessageMiddlewares(pipelineName),
+                                                                        sp.GetMessageDelegate(pipelineName),
+                                                                        sp.GetRequiredService<ILogger>()))
                 .RunConsumerAsBackgroundService();
     }
 }

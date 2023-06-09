@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Cloud.Messaging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ using Microsoft.Shared.Diagnostics;
 
 namespace Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Demo;
 
-internal class MultipleDestinationMessageDelegate : IMessageDelegate
+internal class MultipleDestinationMessageDelegate
 {
     private readonly List<IMessageDestination> _messageDestinations;
 
@@ -19,15 +18,13 @@ internal class MultipleDestinationMessageDelegate : IMessageDelegate
     }
 
     /// <summary>
-    /// Read message.
+    /// The <see cref="MessageDelegate"/> implementation which writes message to <see cref="List{IMessageDestination}"/>.
     /// </summary>
     /// <param name="context"><see cref="MessageContext"/>.</param>
     /// <returns><see cref="ValueTask"/>.</returns>
     public async ValueTask InvokeAsync(MessageContext context)
     {
-        ReadOnlyMemory<byte> payload = context.GetSourcePayload();
-        context.SetDestinationPayload(payload);
-
+        context.SetDestinationPayload(context.SourcePayload);
         foreach (IMessageDestination messageDestination in _messageDestinations)
         {
             await messageDestination.WriteAsync(context);

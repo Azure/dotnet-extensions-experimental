@@ -10,6 +10,7 @@ using Azure;
 using Azure.Storage.Queues;
 using Azure.Storage.Queues.Models;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Data;
 using Moq;
 using Xunit;
 
@@ -20,12 +21,7 @@ namespace Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Implementatio
 /// </summary>
 public class AzureStorageQueueDestinationTests
 {
-    private static MessageContext CreateContext()
-    {
-        var context = new MessageContext(new FeatureCollection());
-        context.SetMessageDestinationFeatures(new FeatureCollection());
-        return context;
-    }
+    private static MessageContext CreateContext() => new TestMessageContext(new FeatureCollection(), ReadOnlyMemory<byte>.Empty);
 
     [Theory]
     [InlineData("abc", 10, 20)]
@@ -43,10 +39,9 @@ public class AzureStorageQueueDestinationTests
 
         MessageContext context = CreateContext();
         context.SetDestinationPayload(Encoding.UTF8.GetBytes(message));
-        context.SetWriteOptions(new AzureStorageQueueWriteOptions(visibilityTimeout, timeToLive));
+        context.SetAzureStorageQueueWriteOptions(new AzureStorageQueueWriteOptions(visibilityTimeout, timeToLive));
 
         await messageDestination.WriteAsync(context);
-
         mockQueueClient.Verify(x => x.SendMessageAsync(It.IsAny<BinaryData>(), visibilityTimeout, timeToLive, It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -69,7 +64,7 @@ public class AzureStorageQueueDestinationTests
 
         if (setWriteOptionsAtMethodLevel)
         {
-            context.SetWriteOptions(new AzureStorageQueueWriteOptions(null, null));
+            context.SetAzureStorageQueueWriteOptions(new AzureStorageQueueWriteOptions(null, null));
         }
 
         await messageDestination.WriteAsync(context);

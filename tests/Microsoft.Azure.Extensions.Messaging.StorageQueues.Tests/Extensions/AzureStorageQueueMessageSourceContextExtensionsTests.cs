@@ -7,6 +7,7 @@ using Azure.Storage.Queues;
 using Azure.Storage.Queues.Models;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Azure.Extensions.Messaging.StorageQueues.Internal;
+using Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Data;
 using Moq;
 using Xunit;
 
@@ -17,28 +18,15 @@ namespace Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Extensions;
 /// </summary>
 public class AzureStorageQueueMessageSourceContextExtensionsTests
 {
-    private static MessageContext CreateContext()
-    {
-        var features = new FeatureCollection();
-        var context = new MessageContext(features);
+    private static MessageContext CreateContext() => new TestMessageContext(new FeatureCollection(), ReadOnlyMemory<byte>.Empty);
 
-        return context;
-    }
-
-    private static MessageContext CreateContext(IFeatureCollection sourceFeatures)
-    {
-        var features = new FeatureCollection();
-        var context = new MessageContext(features);
-        context.SetMessageSourceFeatures(sourceFeatures);
-
-        return context;
-    }
+    private static MessageContext CreateContext(IFeatureCollection features) => new TestMessageContext(features, ReadOnlyMemory<byte>.Empty);
 
     [Fact]
     public void TryGetMessageProcessingState_ShouldReturnFalse_WhenNotSet()
     {
         MessageContext context = CreateContext();
-        Assert.False(context.TryGetAzureStorageQueueMessageProcessingState(out AzureStorageQueueMessageProcessingState messageProcessingState));
+        Assert.False(context.TryGetAzureStorageQueueMessageProcessingState(out _));
     }
 
     [Fact]
@@ -49,7 +37,7 @@ public class AzureStorageQueueMessageSourceContextExtensionsTests
             MessageContext context = CreateContext();
             context.SetAzureStorageQueueMessageProcessingState(setProcessingState);
 
-            Assert.True(context.TryGetAzureStorageQueueMessageProcessingState(out AzureStorageQueueMessageProcessingState retrievedProcessingState));
+            Assert.True(context.TryGetAzureStorageQueueMessageProcessingState(out AzureStorageQueueMessageProcessingState? retrievedProcessingState));
             Assert.Equal(setProcessingState, retrievedProcessingState);
         }
     }
@@ -75,39 +63,11 @@ public class AzureStorageQueueMessageSourceContextExtensionsTests
     }
 
     [Fact]
-    public void TryGetQueueClient_ShouldReturnFalseWithNullData_WhenFeatureThrowsException()
-    {
-        var exception = new InvalidOperationException();
-        var mockSourceFeatures = new Mock<IFeatureCollection>();
-        mockSourceFeatures.Setup(x => x.Get<QueueClient>()).Throws(exception);
-
-        MessageContext context = CreateContext(mockSourceFeatures.Object);
-        Assert.False(context.TryGetAzureStorageQueueClient(out QueueClient? queueClient));
-        Assert.Null(queueClient);
-
-        mockSourceFeatures.Verify(x => x.Get<QueueClient>(), Times.Once);
-    }
-
-    [Fact]
     public void TryGetQueueMessage_ShouldReturnFalseWithNullData_WhenNotSet()
     {
         MessageContext context = CreateContext(new FeatureCollection());
         Assert.False(context.TryGetAzureStorageQueueMessage(out QueueMessage? queueMessage));
         Assert.Null(queueMessage);
-    }
-
-    [Fact]
-    public void TryGetQueueMessage_ShouldReturnFalseWithNullData_WhenFeatureThrowsException()
-    {
-        var exception = new InvalidOperationException();
-        var mockSourceFeatures = new Mock<IFeatureCollection>();
-        mockSourceFeatures.Setup(x => x.Get<QueueMessage>()).Throws(exception);
-
-        MessageContext context = CreateContext(mockSourceFeatures.Object);
-        Assert.False(context.TryGetAzureStorageQueueMessage(out QueueMessage? queueMessage));
-        Assert.Null(queueMessage);
-
-        mockSourceFeatures.Verify(x => x.Get<QueueMessage>(), Times.Once);
     }
 
     [Fact]
@@ -127,20 +87,6 @@ public class AzureStorageQueueMessageSourceContextExtensionsTests
         MessageContext context = CreateContext(new FeatureCollection());
         Assert.False(context.TryGetAzureStorageQueueSource(out IAzureStorageQueueSource? queueSource));
         Assert.Null(queueSource);
-    }
-
-    [Fact]
-    public void TryGetQueueSource_ShouldReturnFalseWithNullData_WhenFeatureThrowsException()
-    {
-        var exception = new InvalidOperationException();
-        var mockSourceFeatures = new Mock<IFeatureCollection>();
-        mockSourceFeatures.Setup(x => x.Get<IAzureStorageQueueSource>()).Throws(exception);
-
-        MessageContext context = CreateContext(mockSourceFeatures.Object);
-        Assert.False(context.TryGetAzureStorageQueueSource(out IAzureStorageQueueSource? queueSource));
-        Assert.Null(queueSource);
-
-        mockSourceFeatures.Verify(x => x.Get<IAzureStorageQueueSource>(), Times.Once);
     }
 
     [Fact]

@@ -13,11 +13,9 @@ using Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Data.Consumers;
 using Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Data.Delegates;
 using Microsoft.Azure.Extensions.Messaging.StorageQueues.Tests.Data.Middlewares;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Testing;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Telemetry.Testing.Logging;
 using Moq;
 using Xunit;
 
@@ -35,23 +33,18 @@ public class AzureStorageQueueTests
     {
         var mocks = new TestMocks(QueuesModelFactory.QueueMessage(messageId, popReceipt, message, 0), writerThrowsException);
 
-        IHostBuilder hostBuilder = FakeHost.CreateBuilder();
+        IHostBuilder hostBuilder = FakeHost.CreateBuilder(TestMocks.GetFakeHostOptions());
         hostBuilder.ConfigureServices(services =>
         {
-            mocks.RegisterCommonServices(services);
-
             // Create a message consumer pipeline.
             services.AddAsyncPipeline(pipelineName)
                     .ConfigureMessageSource<IMessageSource>(_ => mocks.MessageSource)
-                    .AddMessageMiddleware<IMessageMiddleware>(_ => new SampleMiddleware(mocks.MockMessageDelegate1.Object))
-                    .ConfigureTerminalMessageDelegate<IMessageDelegate>(_ => new SampleWriterDelegate(mocks.MockMessageDelegate2.Object, mocks.MessageWriter))
-                    .ConfigureMessageConsumer<IMessageConsumer>(sp =>
-                    {
-                        var messageSource = sp.GetRequiredService<INamedServiceProvider<IMessageSource>>().GetRequiredService(pipelineName);
-                        var messageDelegate = sp.GetRequiredService<INamedServiceProvider<IMessageDelegate>>().GetRequiredService(pipelineName);
-                        var logger = sp.GetRequiredService<ILogger>();
-                        return new SingleMessageConsumer(messageSource, messageDelegate, logger);
-                    })
+                    .AddMessageMiddleware(_ => new SampleMiddleware(mocks.MockMessageDelegate1.Object))
+                    .ConfigureTerminalMessageDelegate(_ => new SampleWriterDelegate(mocks.MockMessageDelegate2.Object, mocks.MessageWriter).InvokeAsync)
+                    .ConfigureMessageConsumer(sp => new SingleMessageConsumer(sp.GetMessageSource(pipelineName),
+                                                                              sp.GetMessageMiddlewares(pipelineName),
+                                                                              sp.GetMessageDelegate(pipelineName),
+                                                                              sp.GetRequiredService<ILogger>()))
                     .RunConsumerAsBackgroundService();
         });
 
@@ -68,22 +61,28 @@ public class AzureStorageQueueTests
 
     private class TestMocks
     {
-        public readonly Mock<IMessageDelegate> MockMessageDelegate1 = new();
-        public readonly Mock<IMessageDelegate> MockMessageDelegate2 = new();
+        public static FakeHostOptions GetFakeHostOptions() => new()
+        {
+            StartUpTimeout = TimeSpan.FromMinutes(4),
+            ShutDownTimeout = TimeSpan.FromMinutes(4),
+            TimeToLive = TimeSpan.FromMinutes(10),
+            FakeLogging = true,
+        };
+
+        public readonly Mock<MessageDelegate> MockMessageDelegate1 = new();
+        public readonly Mock<MessageDelegate> MockMessageDelegate2 = new();
 
         public readonly AzureStorageQueueSource MessageSource;
         public readonly AzureStorageQueueDestination MessageWriter;
-
-        private readonly ILogger _logger = new FakeLogger();
         private readonly Mock<QueueClient> _mockQueueClient = new();
 
         public TestMocks(QueueMessage message, bool writerThrowsException)
         {
             var sendReceipt = QueuesModelFactory.SendReceipt(message.MessageId,
-                                                                     message.InsertedOn.GetValueOrDefault(),
-                                                                     message.ExpiresOn.GetValueOrDefault(),
-                                                                     message.PopReceipt,
-                                                                     message.NextVisibleOn.GetValueOrDefault());
+                                                             message.InsertedOn.GetValueOrDefault(),
+                                                             message.ExpiresOn.GetValueOrDefault(),
+                                                             message.PopReceipt,
+                                                             message.NextVisibleOn.GetValueOrDefault());
             _mockQueueClient.Setup(x => x.ReceiveMessageAsync(It.IsAny<TimeSpan>(), It.IsAny<CancellationToken>())).ReturnsAsync(Response.FromValue(message, Mock.Of<Response>()));
 
             MessageSource = new AzureStorageQueueSource(_mockQueueClient.Object, new AzureStorageQueueReadOptions(TimeSpan.Zero), () => new FeatureCollection());
@@ -102,17 +101,11 @@ public class AzureStorageQueueTests
             MessageWriter = new AzureStorageQueueDestination(_mockQueueClient.Object, new AzureStorageQueueWriteOptions(TimeSpan.Zero, TimeSpan.Zero));
         }
 
-        public void RegisterCommonServices(IServiceCollection services)
-        {
-            // Register logger.
-            services.TryAddSingleton(_logger);
-        }
-
         public void VerifyMocksCount(int count)
         {
             _mockQueueClient.Verify(x => x.ReceiveMessageAsync(It.IsAny<TimeSpan>(), It.IsAny<CancellationToken>()), Times.Exactly(count));
-            MockMessageDelegate1.Verify(x => x.InvokeAsync(It.IsAny<MessageContext>()), Times.Exactly(count));
-            MockMessageDelegate2.Verify(x => x.InvokeAsync(It.IsAny<MessageContext>()), Times.Exactly(count));
+            MockMessageDelegate1.Verify(x => x.Invoke(It.IsAny<MessageContext>()), Times.Exactly(count));
+            MockMessageDelegate2.Verify(x => x.Invoke(It.IsAny<MessageContext>()), Times.Exactly(count));
             _mockQueueClient.Verify(x => x.SendMessageAsync(It.IsAny<BinaryData>(), It.IsAny<TimeSpan?>(), It.IsAny<TimeSpan?>(), It.IsAny<CancellationToken>()), Times.Exactly(count));
         }
     }
