@@ -2,11 +2,7 @@
 
   <PropertyGroup>
     <Description>Tests for $(MSBuildProjectName.Replace('.Tests', ''))</Description>
-    <!-- See https://github.com/dotnet/r9/issues/41 -->
-    <SkipTests>true</SkipTests>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(IsWindowsBuild)' != 'true' ">
+    <!-- Require CosmosDB emulator. See https://github.com/dotnet/r9/issues/41 -->
     <SkipTests>true</SkipTests>
   </PropertyGroup>
 
