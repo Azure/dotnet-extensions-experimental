@@ -128,11 +128,10 @@ internal sealed class CosmosDatabaseConfiguration
         EnablePrivatePortPool = cosmosOptions?.EnablePrivatePortPool ?? true;
         EnableTcpEndpointRediscovery = cosmosOptions?.EnableTcpEndpointRediscovery ?? true;
 
-        //// Port https://domoreexp.visualstudio.com/R9/_git/SDK/pullrequest/717109?
-        ////if (options.OverrideSerialization)
-        ////{
-        ////    CosmosSerializer = new CosmosSystemTextJsonSerializer(options.JsonSerializerOptions);
-        ////}
+        if (options.OverrideSerialization)
+        {
+            CosmosSerializer = new CosmosSystemTextJsonSerializer(options.JsonSerializerOptions);
+        }
     }
 
     internal static CosmosDatabaseConfiguration GetGlobalConfiguration(DatabaseOptions options)
