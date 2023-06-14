@@ -10,5 +10,5 @@ IF ["%_args%"] == [""] (
     SET _args=-restore -build
 )
 
-powershell -ExecutionPolicy ByPass -NoProfile -command "& """%~dp0eng\common\Build.ps1""" %_args%"
+powershell -ExecutionPolicy ByPass -NoProfile -command "& """%~dp0eng\Build.ps1""" %_args%"
 exit /b %ERRORLEVEL%

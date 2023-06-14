@@ -164,7 +164,7 @@ stages:
               repoTestResultsPath: $(Build.Arcade.TestResultsPath)
               skipQualityGates: ${{ eq(variables['SkipQualityGates'], 'true') }}
               isWindows: true
-              warnAsError: '$false'
+              warnAsError: 0
 
       # ----------------------------------------------------------------
       # This job build and run tests on Ubuntu
@@ -200,7 +200,7 @@ stages:
               repoTestResultsPath: $(Build.Arcade.TestResultsPath)
               skipQualityGates: ${{ eq(variables['SkipQualityGates'], 'true') }}
               isWindows: false
-              warnAsError: 'false'
+              warnAsError: 0
 
 
 # ----------------------------------------------------------------
@@ -302,7 +302,6 @@ stages:
               skipQualityGates: true
               skipTests: true
               isWindows: false
-              warnAsError: 'true'
 
 
 # Publish and validation steps. Only run in official builds

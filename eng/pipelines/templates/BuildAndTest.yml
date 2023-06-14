@@ -16,7 +16,8 @@ parameters:
     type: boolean
     default: false
   - name: warnAsError
-    type: string
+    type: number
+    default: 1
 
 steps:
   # Debug

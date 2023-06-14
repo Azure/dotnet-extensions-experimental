@@ -16,4 +16,4 @@ then
 fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-"$DIR/eng/common/build.sh" "$@"
+"$DIR/eng/build.sh" "$@"
