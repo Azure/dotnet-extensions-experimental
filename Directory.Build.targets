@@ -15,6 +15,15 @@
     <!-- This is false for local development, but set to true in the CI system -->
     <TreatWarningsAsErrors Condition=" '$(TreatWarningsAsErrors)' == '' ">false</TreatWarningsAsErrors>
 
+    <!--
+      Related to https://github.com/dotnet/extensions/pull/4061
+
+      warning NU1603: Microsoft.Azure.Extensions.DocumentDb.Cosmos depends on Microsoft.NET.ILLink.Tasks (>= 7.0.100-1.23211.1)
+                      but Microsoft.NET.ILLink.Tasks 7.0.100-1.23211.1 was not found.
+                      An approximate best match of Microsoft.NET.ILLink.Tasks 8.0.0-alpha.1.23060.9 was resolved.
+    -->
+    <NoWarn>$(NoWarn);NU1603</NoWarn>
+
     <!-- TODO: to be reenabled and all warnings fixed (https://github.com/dotnet/r9/issues/177) -->
     <NoWarn>$(NoWarn);IL2026;IL2087;IL2067;IL2075;IL2091;IL2072;IL2090;CA1825;IL2070;IL2098;IL2057</NoWarn>
 
