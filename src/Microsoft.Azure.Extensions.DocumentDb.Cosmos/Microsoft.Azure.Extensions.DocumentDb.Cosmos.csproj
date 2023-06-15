@@ -13,6 +13,8 @@
   <PropertyGroup>
     <Stage>normal</Stage>
     <MinCodeCoverage>100</MinCodeCoverage>
+    <!-- Require CosmosDB emulator. See https://github.com/Azure/dotnet-extensions-experimental/issues/20 -->
+    <TempMinCodeCoverage>0</TempMinCodeCoverage>
     <MinMutationScore>95</MinMutationScore>
   </PropertyGroup>
 

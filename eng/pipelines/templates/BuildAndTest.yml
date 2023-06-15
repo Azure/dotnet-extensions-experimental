@@ -32,8 +32,6 @@ steps:
   #       Get-ChildItem env:* | Sort-Object Name  
   #   displayName: Debug
 
-  - task: NuGetAuthenticate@0
-
   - script: ${{ parameters.buildScript }}
             -restore
             /bl:${{ parameters.repoLogPath }}/restore.binlog

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Tests for $(MSBuildProjectName.Replace('.Tests', ''))</Description>
-    <!-- Require CosmosDB emulator. See https://github.com/dotnet/r9/issues/41 -->
+    <!-- Require CosmosDB emulator. See https://github.com/Azure/dotnet-extensions-experimental/issues/20 -->
     <SkipTests>true</SkipTests>
   </PropertyGroup>
 
