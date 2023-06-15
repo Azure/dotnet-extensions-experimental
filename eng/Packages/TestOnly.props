@@ -23,7 +23,6 @@
     <PackageVersion Include="Microsoft.Extensions.Hosting.Testing" Version="$(MicrosoftExtensionsHostingTestingVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="$(MicrosoftExtensionsHttpVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Http.Telemetry" Version="$(MicrosoftExtensionsHttpTelemetryVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Telemetry.Console" Version="$(MicrosoftExtensionsTelemetryConsoleVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Telemetry.Testing" Version="$(MicrosoftExtensionsTelemetryTestingVersion)" />
     <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="$(MicrosoftExtensionsTimeProviderTestingVersion)" />
 

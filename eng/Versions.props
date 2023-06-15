@@ -34,7 +34,6 @@
     <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-preview.6.23314.8</MicrosoftExtensionsHttpTelemetryVersion>
     <MicrosoftExtensionsOptionsValidationVersion>8.0.0-preview.6.23314.8</MicrosoftExtensionsOptionsValidationVersion>
     <MicrosoftExtensionsTelemetryAbstractionsVersion>8.0.0-preview.6.23314.8</MicrosoftExtensionsTelemetryAbstractionsVersion>
-    <MicrosoftExtensionsTelemetryConsoleVersion>8.0.0-preview.6.23313.5</MicrosoftExtensionsTelemetryConsoleVersion>
     <MicrosoftExtensionsTelemetryTestingVersion>8.0.0-preview.6.23314.8</MicrosoftExtensionsTelemetryTestingVersion>
     <MicrosoftExtensionsTelemetryVersion>8.0.0-preview.6.23314.8</MicrosoftExtensionsTelemetryVersion>
     <MicrosoftExtensionsTimeProviderTestingVersion>8.0.0-preview.6.23314.8</MicrosoftExtensionsTimeProviderTestingVersion>

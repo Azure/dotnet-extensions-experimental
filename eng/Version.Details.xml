@@ -112,10 +112,6 @@
       <Uri>https://github.com/dotnet/extensions</Uri>
       <Sha>bac0d56600284b1fa0ce7f1eb68d7df09deea3bb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Telemetry.Console" Version="8.0.0-preview.6.23313.5">
-      <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>21ba7a0678869eaefec7ede1d7aee057bb1b813f</Sha>
-    </Dependency>
     <Dependency Name="Microsoft.Extensions.Telemetry.Testing" Version="8.0.0-preview.6.23314.8">
       <Uri>https://github.com/dotnet/extensions</Uri>
       <Sha>bac0d56600284b1fa0ce7f1eb68d7df09deea3bb</Sha>

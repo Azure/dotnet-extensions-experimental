@@ -1,18 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.IO;
-using System.Net.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Telemetry.Internal;
-using Xunit;
-
 namespace Microsoft.Azure.Extensions.Telemetry.Test;
 
 #pragma warning disable CA1505
+#pragma warning disable S125
 public class AzureMetadataTests
 {
+    /*
+    See https://github.com/Azure/dotnet-extensions-experimental/issues/22
+
     private readonly IDownstreamDependencyMetadataManager _depMetadataManager;
 
     public AzureMetadataTests()
@@ -53,4 +50,7 @@ public class AzureMetadataTests
             }
         }
     }
+    */
 }
+#pragma warning restore S125
+#pragma warning restore CA1505
