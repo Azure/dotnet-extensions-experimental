@@ -54,7 +54,7 @@ Get-ChildItem -Path src -Include '*.*sproj' -Recurse | ForEach-Object {
     }
 
     # Some projects currently fail code coverage checks. Allow to temporarily override the requirements
-    # See https://github.com/dotnet/r9/issues/75
+    # TODO: This should eventually removed.
     if (![string]::IsNullOrWhiteSpace($TempMinCodeCoverage)) {
         $MinCodeCoverage = $TempMinCodeCoverage
     }
