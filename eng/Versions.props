@@ -25,21 +25,21 @@
   -->
   <PropertyGroup Label="Automated">
     <!-- Dependencies from https://github.com/dotnet/extensions -->
-    <MicrosoftAspNetCoreHeaderParsingVersion>8.0.0-preview.7.23320.8</MicrosoftAspNetCoreHeaderParsingVersion>
-    <MicrosoftExtensionsComplianceTestingVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsComplianceTestingVersion>
-    <MicrosoftExtensionsEnumStringsVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsEnumStringsVersion>
-    <MicrosoftExtensionsHostingTestingStartupInitializationVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsHostingTestingStartupInitializationVersion>
-    <MicrosoftExtensionsHostingTestingVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsHostingTestingVersion>
-    <MicrosoftExtensionsHttpResilienceVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsHttpResilienceVersion>
-    <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsHttpTelemetryVersion>
-    <MicrosoftExtensionsOptionsValidationVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsOptionsValidationVersion>
-    <MicrosoftExtensionsTelemetryAbstractionsVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsTelemetryAbstractionsVersion>
-    <MicrosoftExtensionsTelemetryTestingVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsTelemetryTestingVersion>
-    <MicrosoftExtensionsTelemetryVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsTelemetryVersion>
-    <MicrosoftExtensionsTimeProviderTestingVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsTimeProviderTestingVersion>
-    <MicrosoftExtensionsOptionsValidateOnStartVersion>8.0.0-preview.7.23320.8</MicrosoftExtensionsOptionsValidateOnStartVersion>
-    <SystemCloudDocumentDbAbstractionsVersion>8.0.0-preview.7.23320.8</SystemCloudDocumentDbAbstractionsVersion>
-    <SystemCloudMessagingVersion>8.0.0-preview.7.23320.8</SystemCloudMessagingVersion>
+    <MicrosoftAspNetCoreHeaderParsingVersion>8.0.0-preview.7.23321.4</MicrosoftAspNetCoreHeaderParsingVersion>
+    <MicrosoftExtensionsComplianceTestingVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsComplianceTestingVersion>
+    <MicrosoftExtensionsEnumStringsVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsEnumStringsVersion>
+    <MicrosoftExtensionsHostingTestingStartupInitializationVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsHostingTestingStartupInitializationVersion>
+    <MicrosoftExtensionsHostingTestingVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsHostingTestingVersion>
+    <MicrosoftExtensionsHttpResilienceVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsHttpResilienceVersion>
+    <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsHttpTelemetryVersion>
+    <MicrosoftExtensionsOptionsValidationVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsOptionsValidationVersion>
+    <MicrosoftExtensionsTelemetryAbstractionsVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsTelemetryAbstractionsVersion>
+    <MicrosoftExtensionsTelemetryTestingVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsTelemetryTestingVersion>
+    <MicrosoftExtensionsTelemetryVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsTelemetryVersion>
+    <MicrosoftExtensionsTimeProviderTestingVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsTimeProviderTestingVersion>
+    <MicrosoftExtensionsOptionsValidateOnStartVersion>8.0.0-preview.7.23321.4</MicrosoftExtensionsOptionsValidateOnStartVersion>
+    <SystemCloudDocumentDbAbstractionsVersion>8.0.0-preview.7.23321.4</SystemCloudDocumentDbAbstractionsVersion>
+    <SystemCloudMessagingVersion>8.0.0-preview.7.23321.4</SystemCloudMessagingVersion>
     <!-- Dependencies from https://github.com/dotnet/runtime -->
     <MicrosoftBclTimeProviderVersion>8.0.0-preview.6.23314.15</MicrosoftBclTimeProviderVersion>
     <MicrosoftExtensionsConfigurationAbstractionsVersion>8.0.0-preview.6.23314.15</MicrosoftExtensionsConfigurationAbstractionsVersion>
