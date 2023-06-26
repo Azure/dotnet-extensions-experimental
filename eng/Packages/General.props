@@ -38,6 +38,5 @@
 
   <Import Project="$(MSBuildThisFileDirectory)\General-net462.props" />
   <Import Project="$(MSBuildThisFileDirectory)\General-netcoreapp3.1.props" />
-  <Import Project="$(MSBuildThisFileDirectory)\General-net6.0.props" />
   <Import Project="$(MSBuildThisFileDirectory)\General-latest.props" />
 </Project>

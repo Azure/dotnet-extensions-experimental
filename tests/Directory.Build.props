@@ -4,7 +4,9 @@
   <PropertyGroup>
     <GenerateDocumentationFile Condition="'$(GenerateDocumentationFile)' == ''">false</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);NU1701;NU1702</NoWarn>
-    <TargetFrameworks>$(NetCoreTargetFrameworks)$(ConditionalNet462)</TargetFrameworks>
+
+    <TargetFrameworks>$(TestNetCoreTargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(IsWindowsBuild)' == 'true' ">$(TestNetCoreTargetFrameworks)$(ConditionalNet462)</TargetFrameworks>
   </PropertyGroup>
 
 </Project>
