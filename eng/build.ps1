@@ -61,12 +61,17 @@ Param(
   [Parameter(ParameterSetName='CommandLine')]
   [switch] $testCoverage,
 
+  # Run mutation tests
+  [Parameter(ParameterSetName='CommandLine')]
+  [switch] $mutationTest,
+
   [Parameter(ValueFromRemainingArguments=$true)][String[]]$properties
 )
 
 function Print-Usage() {
   Write-Host "Custom settings:"
   Write-Host "  -testCoverage           Run unit tests and capture code coverage information."
+  Write-Host "  -mutationTest           Run mutation tests."
   Write-Host ""
 }
 
@@ -78,37 +83,69 @@ if ($help) {
   exit 0
 }
 
-. $PSScriptRoot/common/build.ps1 `
-       -configuration $configuration `
-       -platform $platform `
-       -projects $projects `
-       -verbosity $verbosity `
-       -msbuildEngine $msbuildEngine `
-       -warnAsError $([boolean]::Parse("$warnAsError")) `
-       -nodeReuse $nodeReuse `
-       -restore:$restore `
-       -deployDeps:$deployDeps `
-       -build:$build `
-       -rebuild:$rebuild `
-       -deploy:$deploy `
-       -test:$test `
-       -integrationTest:$integrationTest `
-       -performanceTest:$performanceTest `
-       -sign:$sign `
-       -pack:$pack `
-       -publish:$publish `
-       -clean:$clean `
-       -binaryLog:$binaryLog `
-       -excludeCIBinarylog:$excludeCIBinarylog `
-       -ci:$ci `
-       -prepareMachine:$prepareMachine `
-       -runtimeSourceFeed $runtimeSourceFeed `
-       -runtimeSourceFeedKey $runtimeSourceFeedKey `
-       -excludePrereleaseVS:$excludePrereleaseVS `
-       -nativeToolsOnMachine:$nativeToolsOnMachine `
-       -help:$help `
-       @properties
 
+# Mutation tests are very special kind of tests and, thus, have to run exclusively
+if ($mutationTest) {
+  # Disable incompatible options
+  $restore = $false
+  $build = $false
+  $deploy = $false
+  $deployDeps = $false
+  $integrationTest = $false
+  $performanceTest = $false
+  $sign = $false
+  $pack = $false
+  $testCoverage = $false
+
+  $test = $true;
+  $properties += '/p:TestRunnerName=StrykerNET';
+
+  # Set envvars so that Stryker can locate the .NET SDK
+  $env:DOTNET_ROOT = $(Resolve-Path "$PSScriptRoot/../.dotnet");
+  $env:DOTNET_MULTILEVEL_LOOKUP = 0;
+  $env:PATH = "$env:DOTNET_ROOT;$env:PATH";
+
+  # Create a marker file
+  '' | Out-File .mutationtests
+}
+
+try {
+  . $PSScriptRoot/common/build.ps1 `
+        -configuration $configuration `
+        -platform $platform `
+        -projects $projects `
+        -verbosity $verbosity `
+        -msbuildEngine $msbuildEngine `
+        -warnAsError $([boolean]::Parse("$warnAsError")) `
+        -nodeReuse $nodeReuse `
+        -restore:$restore `
+        -deployDeps:$deployDeps `
+        -build:$build `
+        -rebuild:$rebuild `
+        -deploy:$deploy `
+        -test:$test `
+        -integrationTest:$integrationTest `
+        -performanceTest:$performanceTest `
+        -sign:$sign `
+        -pack:$pack `
+        -publish:$publish `
+        -clean:$clean `
+        -binaryLog:$binaryLog `
+        -excludeCIBinarylog:$excludeCIBinarylog `
+        -ci:$ci `
+        -prepareMachine:$prepareMachine `
+        -runtimeSourceFeed $runtimeSourceFeed `
+        -runtimeSourceFeedKey $runtimeSourceFeedKey `
+        -excludePrereleaseVS:$excludePrereleaseVS `
+        -nativeToolsOnMachine:$nativeToolsOnMachine `
+        -help:$help `
+        @properties
+}
+finally {
+  if ($mutationTest) {
+    Remove-Item -Path .mutationtests
+  }
+}
 
 # Perform code coverage as the last operation, this enables the following scenarios:
 #   .\build.cmd -restore -build -c Release -testCoverage

@@ -39,6 +39,8 @@
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
 
+  <Import Project="$(MSBuildThisFileDirectory)\eng\MSBuild\MutationTests.props" Condition="Exists('$(MSBuildThisFileDirectory)\.mutationtests')" />
+
   <PropertyGroup>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <LangVersion>preview</LangVersion>
@@ -88,7 +90,7 @@
     </ItemGroup>
   </Target>
 
-  <!-- R9 common properties -->
+  <!-- Common properties -->
   <Import Project="$(MSBuildThisFileDirectory)\eng\MSBuild\Analyzers.props" />
   <Import Project="$(MSBuildThisFileDirectory)\eng\MSBuild\Packaging.props" />
   <Import Project="$(MSBuildThisFileDirectory)\eng\MSBuild\LegacySupport.props" />

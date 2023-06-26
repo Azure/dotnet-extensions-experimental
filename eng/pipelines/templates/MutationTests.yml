@@ -1,0 +1,46 @@
+parameters:
+  - name: buildScript
+    type: string
+  - name: buildConfig
+    type: string
+  - name: repoLogPath
+    type: string
+  - name: repoTestResultsPath
+    type: string
+
+steps:
+  - script: ${{ parameters.buildScript }}
+            -restore -build
+            /bl:${{ parameters.repoLogPath }}/build.binlog
+    displayName: Restore
+
+  - script: ${{ parameters.buildScript }}
+            -mutationTest 
+            -configuration ${{ parameters.buildConfig }}
+            -warnAsError 0
+            /bl:${{ parameters.repoLogPath }}/mutationtests.binlog
+    displayName: Mutation tests
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Logs
+    inputs:
+      PathtoPublish: '${{ parameters.repoLogPath }}'
+      PublishLocation: Container
+      ArtifactName: '$(Agent.Os)_$(Agent.JobName)'
+    continueOnError: true
+    condition: always()
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Test Results
+    inputs:
+      PathtoPublish: '${{ parameters.repoTestResultsPath }}'
+      PublishLocation: Container
+      ArtifactName: '$(Agent.Os)_$(Agent.JobName)'
+    continueOnError: true
+    condition: always()
+
+  # Step currently unavailable
+  # - task: PublishMutationReport@0
+  #   displayName: Publish mutation report
+  #   inputs:
+  #     reportPattern: '${{ parameters.repoTestResultsPath }}/**/mutation-report.html'

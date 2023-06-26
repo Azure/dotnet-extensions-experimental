@@ -20,18 +20,6 @@ parameters:
     default: 1
 
 steps:
-  # Debug
-  # - pwsh: |
-  #       Write-Host 'buildScript: ${{ parameters.buildScript }}'
-  #       Write-Host 'buildConfig: ${{ parameters.buildConfig }}'
-  #       Write-Host 'repoLogPath: ${{ parameters.repoLogPath }}'
-  #       Write-Host 'repoTestResultsPath: ${{ parameters.repoTestResultsPath }}'
-  #       Write-Host 'isWindows: ${{ parameters.isWindows }}'
-  #       Write-Host 'skipQualityGates: ${{ parameters.skipQualityGates }}'
-  #       Write-Host 'skipTests: ${{ parameters.skipTests }}'
-  #       Get-ChildItem env:* | Sort-Object Name  
-  #   displayName: Debug
-
   - script: ${{ parameters.buildScript }}
             -restore
             /bl:${{ parameters.repoLogPath }}/restore.binlog
