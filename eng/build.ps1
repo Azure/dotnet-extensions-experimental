@@ -139,6 +139,7 @@ try {
         -excludePrereleaseVS:$excludePrereleaseVS `
         -nativeToolsOnMachine:$nativeToolsOnMachine `
         -help:$help `
+        /m:1 `
         @properties
 }
 finally {
