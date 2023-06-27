@@ -21,6 +21,15 @@ steps:
             /bl:${{ parameters.repoLogPath }}/mutationtests.binlog
     displayName: Mutation tests
 
+  # Publish mutation reports. Only run in public infra
+  - ${{ if eq(variables['System.TeamProject'], 'public') }}:
+    - task: PublishMutationReport@1
+      displayName: Publish Mutation Reports
+      inputs:
+        reportPattern: '${{ parameters.repoTestResultsPath }}/**/mutation-report.html'
+      continueOnError: true
+      condition: always()
+
   - task: PublishBuildArtifacts@1
     displayName: Publish Logs
     inputs:
@@ -38,9 +47,3 @@ steps:
       ArtifactName: '$(Agent.Os)_$(Agent.JobName)'
     continueOnError: true
     condition: always()
-
-  # Step currently unavailable
-  # - task: PublishMutationReport@0
-  #   displayName: Publish mutation report
-  #   inputs:
-  #     reportPattern: '${{ parameters.repoTestResultsPath }}/**/mutation-report.html'
