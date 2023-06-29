@@ -36,7 +36,19 @@
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
-  <Import Project="$(MSBuildThisFileDirectory)\General-net462.props" />
-  <Import Project="$(MSBuildThisFileDirectory)\General-netcoreapp3.1.props" />
-  <Import Project="$(MSBuildThisFileDirectory)\General-latest.props" />
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.5.22" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.52.0.60960" />
+    <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.435" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net462'">
+    <PackageVersion Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageVersion Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
+    <PackageVersion Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageVersion Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+  </ItemGroup>
 </Project>

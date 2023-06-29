@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <!-- Disable building Integration Test projects in LUT. -->
-    <BuildForLiveUnitTesting Condition="'$(BuildForLiveUnitTesting)' == '' and '$(IsIntegrationTestProject)' == 'true'">false</BuildForLiveUnitTesting>
-
-    <!-- Redirect test logs into a subfolder -->
-    <TestResultsLogDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsLogDir)', 'TestLogs'))</TestResultsLogDir>
-
-    <!--
-      Run tests with the VS Test Runner (dotnet test) instead of the XUnit Test runner (dotnet exec).
-      This is needed to produce Cobertura code coverage. See the targets file to more information.
-    -->
-    <UseVSTestRunner>true</UseVSTestRunner>
-  </PropertyGroup>
-
   <ItemGroup>
     <!-- Automatic dependencies -->
     <PackageVersion Include="Microsoft.Extensions.Compliance.Testing" Version="$(MicrosoftExtensionsComplianceTestingVersion)" />
@@ -40,9 +26,23 @@
     <PackageVersion Include="xunit.extensibility.execution" Version="2.4.2" />
   </ItemGroup>
 
-  <Import Project="$(MSBuildThisFileDirectory)\TestOnly-net462.props" />
-  <Import Project="$(MSBuildThisFileDirectory)\TestOnly-netcoreapp3.1.props" />
-  <Import Project="$(MSBuildThisFileDirectory)\TestOnly-net6.0.props" />
-  <Import Project="$(MSBuildThisFileDirectory)\TestOnly-net7.0.props" />
-  <Import Project="$(MSBuildThisFileDirectory)\TestOnly-latest.props" />
+  <ItemGroup Condition="'$(TargetFramework)' == '$(LatestTargetFramework)'">
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="$(MicrosoftAspNetCoreMvcTestingVersion)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.8" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.19" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.32" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net462'">
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.2.0" />
+  </ItemGroup>
 </Project>
