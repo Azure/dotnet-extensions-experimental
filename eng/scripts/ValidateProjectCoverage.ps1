@@ -90,7 +90,10 @@ $CoberturaReport.coverage.packages.package | ForEach-Object {
             [void]$Errors.Add(
                 (
                     New-Object PSObject -Property @{
-                        "Project"=$Name;"Coverage Type"="Line";"Expected"=$MinCodeCoverage;"Actual"="$esc[1m$esc[0;31m$($LineCoverage)$esc[0m"
+                        "Project" = $Name;
+                        "Coverage Type" = "Line";
+                        "Expected" = $MinCodeCoverage;
+                        "Actual" = "$esc[1m$esc[0;31m$($LineCoverage)$esc[0m"
                     }
                 )
             )
@@ -101,7 +104,10 @@ $CoberturaReport.coverage.packages.package | ForEach-Object {
             [void]$Errors.Add(
                 (
                     New-Object PSObject -Property @{
-                        "Project"=$Name;"Coverage Type"="Branch";"Expected"=$MinCodeCoverage;"Actual"="$esc[1m$esc[0;31m$($BranchCoverage)$esc[0m"
+                        "Project" = $Name;
+                        "Coverage Type" = "Branch";
+                        "Expected" = $MinCodeCoverage;
+                        "Actual" = "$esc[1m$esc[0;31m$($BranchCoverage)$esc[0m"
                     }
                 )
             )
@@ -114,7 +120,9 @@ $CoberturaReport.coverage.packages.package | ForEach-Object {
             [void]$Kudos.Add(
                 (
                     New-Object PSObject -Property @{
-                        "Project"=$Name;"Expected"=$MinCodeCoverage;"Actual"="$esc[1m$esc[0;32m$($lowestReported)$esc[0m";
+                        "Project" = $Name;
+                        "Expected" = $MinCodeCoverage;
+                        "Actual" = "$esc[1m$esc[0;32m$($lowestReported)$esc[0m";
                     }
                 )
             )
@@ -150,9 +158,9 @@ Write-Header -message "`r`n[!!] Found $($Errors.Count) issues!" -isError ($Error
 $Errors | `
     Sort-Object Project, 'Coverage Type' | `
     Format-Table "Project", `
-                @{ Name="Coverage Type"; Expression="Coverage Type"; Width=15 }, `
                 @{ Name="Expected"; Expression="Expected"; Width=10; Alignment = "Right" }, `
-                @{ Name="Actual"; Expression="Actual"; Width=10; Alignment = "Right" } `
+                @{ Name="Actual"; Expression="Actual"; Width=10; Alignment = "Right" }, `
+                @{ Name="Coverage Type"; Expression="Coverage Type"; Width=10; Alignment = "Center" } `
                 -AutoSize -Wrap
 exit -1;
 
