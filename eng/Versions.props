@@ -25,21 +25,21 @@
   -->
   <PropertyGroup Label="Automated">
     <!-- Dependencies from https://github.com/dotnet/extensions -->
-    <MicrosoftAspNetCoreHeaderParsingVersion>8.0.0-preview.7.23328.7</MicrosoftAspNetCoreHeaderParsingVersion>
-    <MicrosoftExtensionsComplianceTestingVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsComplianceTestingVersion>
-    <MicrosoftExtensionsEnumStringsVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsEnumStringsVersion>
-    <MicrosoftExtensionsHostingTestingStartupInitializationVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsHostingTestingStartupInitializationVersion>
-    <MicrosoftExtensionsHostingTestingVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsHostingTestingVersion>
-    <MicrosoftExtensionsHttpResilienceVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsHttpResilienceVersion>
-    <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsHttpTelemetryVersion>
+    <MicrosoftAspNetCoreHeaderParsingVersion>8.0.0-preview.7.23329.7</MicrosoftAspNetCoreHeaderParsingVersion>
+    <MicrosoftExtensionsComplianceTestingVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsComplianceTestingVersion>
+    <MicrosoftExtensionsEnumStringsVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsEnumStringsVersion>
+    <MicrosoftExtensionsHostingTestingStartupInitializationVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsHostingTestingStartupInitializationVersion>
+    <MicrosoftExtensionsHostingTestingVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsHostingTestingVersion>
+    <MicrosoftExtensionsHttpResilienceVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsHttpResilienceVersion>
+    <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsHttpTelemetryVersion>
     <MicrosoftExtensionsOptionsValidationVersion>8.0.0-preview.7.23326.2</MicrosoftExtensionsOptionsValidationVersion>
-    <MicrosoftExtensionsTelemetryAbstractionsVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsTelemetryAbstractionsVersion>
-    <MicrosoftExtensionsTelemetryTestingVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsTelemetryTestingVersion>
-    <MicrosoftExtensionsTelemetryVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsTelemetryVersion>
-    <MicrosoftExtensionsTimeProviderTestingVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsTimeProviderTestingVersion>
-    <MicrosoftExtensionsOptionsValidateOnStartVersion>8.0.0-preview.7.23328.7</MicrosoftExtensionsOptionsValidateOnStartVersion>
-    <SystemCloudDocumentDbAbstractionsVersion>8.0.0-preview.7.23328.7</SystemCloudDocumentDbAbstractionsVersion>
-    <SystemCloudMessagingVersion>8.0.0-preview.7.23328.7</SystemCloudMessagingVersion>
+    <MicrosoftExtensionsTelemetryAbstractionsVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsTelemetryAbstractionsVersion>
+    <MicrosoftExtensionsTelemetryTestingVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsTelemetryTestingVersion>
+    <MicrosoftExtensionsTelemetryVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsTelemetryVersion>
+    <MicrosoftExtensionsTimeProviderTestingVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsTimeProviderTestingVersion>
+    <MicrosoftExtensionsOptionsValidateOnStartVersion>8.0.0-preview.7.23329.7</MicrosoftExtensionsOptionsValidateOnStartVersion>
+    <SystemCloudDocumentDbAbstractionsVersion>8.0.0-preview.7.23329.7</SystemCloudDocumentDbAbstractionsVersion>
+    <SystemCloudMessagingVersion>8.0.0-preview.7.23329.7</SystemCloudMessagingVersion>
     <!-- Dependencies from https://github.com/dotnet/runtime -->
     <MicrosoftBclTimeProviderVersion>8.0.0-preview.7.23326.5</MicrosoftBclTimeProviderVersion>
     <MicrosoftExtensionsConfigurationAbstractionsVersion>8.0.0-preview.7.23326.5</MicrosoftExtensionsConfigurationAbstractionsVersion>
@@ -57,8 +57,8 @@
     <MicrosoftExtensionsPrimitivesVersion>8.0.0-preview.7.23326.5</MicrosoftExtensionsPrimitivesVersion>
     <SystemTextJsonVersion>8.0.0-preview.7.23326.5</SystemTextJsonVersion>
     <!-- Dependencies from https://github.com/aspnet/AspNetCore -->
-    <MicrosoftAspNetCoreMvcTestingVersion>8.0.0-preview.7.23327.20</MicrosoftAspNetCoreMvcTestingVersion>
-    <MicrosoftExtensionsDiagnosticsHealthChecksVersion>8.0.0-preview.7.23327.20</MicrosoftExtensionsDiagnosticsHealthChecksVersion>
+    <MicrosoftAspNetCoreMvcTestingVersion>8.0.0-preview.7.23329.2</MicrosoftAspNetCoreMvcTestingVersion>
+    <MicrosoftExtensionsDiagnosticsHealthChecksVersion>8.0.0-preview.7.23329.2</MicrosoftExtensionsDiagnosticsHealthChecksVersion>
   </PropertyGroup>
   <!--
 
