@@ -22,19 +22,9 @@
     <_ProjectUnderTestProjectReference Include="@(ProjectReference->WithMetadataValue('ProjectUnderTest', 'true'))" />
   </ItemGroup>
 
-
   <Target Name="RunTests"
           Outputs="%(TestToRun.ResultsStdOutPath)"
           Condition="'@(TestToRun)' != ''">
-    <!--
-       is little hack. Select only those test projects that target the "latest" TFM.
-       As per the Stryker.NET docs (https://stryker-mutator.io/docs/stryker-net/configuration/#target-framework-string):
-
-            If the project targets multiple frameworks, this way you can specify the particular framework to build against.
-            If you specify a non-existent target, Stryker will build the project against a random one (or the only one if so).
-
-        There is probably a better way to filter, but it wasn't found to date...
-     -->
     <ItemGroup>
       <_FilteredTestToRun Include="@(TestToRun->WithMetadataValue('TargetFramework', '$(LatestTargetFramework)'))" />
     </ItemGroup>
@@ -43,35 +33,7 @@
                 Condition=" '@(_ProjectUnderTestProjectReference)' != '' and '@(_FilteredTestToRun)' != '' " />
   </Target>
 
-
-  <Target Name="_UpdateStrykerJson">
-    <PropertyGroup>
-      <!-- The template file, don't modify it as it is used by the private repo! -->
-      <_StrykerJsonConfigFile>$([MSBuild]::NormalizePath('$(RepositoryEngineeringDir)', 'StrykerNET', 'stryker-config.json'))</_StrykerJsonConfigFile>
-      <!-- The script that will make a copy of the template config and update it with the "latest" TFM -->
-      <_UpdateStrykerJsonScripPath>$([MSBuild]::NormalizePath('$(ArtifactsTmpDir)', 'update-strykerconfigjson.$(MSBuildProjectName).ps1'))</_UpdateStrykerJsonScripPath>
-      <!-- The name of the new config -->
-      <_UpdatedStrykerJsonPath>$([MSBuild]::NormalizePath('$(ArtifactsTmpDir)', '$(MSBuildProjectName).json'))</_UpdatedStrykerJsonPath>
-    </PropertyGroup>
-
-    <!-- Create a temporary script that would create a new stryker-config.json from the template with the "latest" TFM -->
-    <ItemGroup>
-      <_UpdateStrykerConfigJsonScript Include="$config = Get-Content $(_StrykerJsonConfigFile) | ConvertFrom-Json;" />
-      <_UpdateStrykerConfigJsonScript Include="$config.'stryker-config'.'target-framework' = '$(LatestTargetFramework)';" />
-      <_UpdateStrykerConfigJsonScript Include="$config | ConvertTo-Json | Out-File $(_UpdatedStrykerJsonPath);" />
-    </ItemGroup>
-    <WriteLinesToFile File="$(_UpdateStrykerJsonScripPath)" Lines="@(_UpdateStrykerConfigJsonScript)" Overwrite="true" Encoding="Unicode" />
-
-    <!-- ...run the script -->
-    <Exec Command='powershell $(_UpdateStrykerJsonScripPath)' WorkingDirectory="$(RepoRoot)" Condition=" '$(OS)' == 'Windows_NT' " />
-    <Exec Command='$(DotNetTool) pwsh $(_UpdateStrykerJsonScripPath)' WorkingDirectory="$(RepoRoot)" Condition=" '$(OS)' != 'Windows_NT' " />
-
-    <!-- ...and delete the script -->
-    <Delete Files="$(_UpdateStrykerJsonScripPath)" Condition=" Exists($(_UpdateStrykerJsonScripPath)) " />
-  </Target>
-
-
-  <Target Name="RunMutationTesting" DependsOnTargets="_UpdateStrykerJson">
+  <Target Name="RunMutationTesting">
     <!-- Ensure there is a one-to-one mapping between a test project and a project-under-test -->
     <PropertyGroup>
       <_ProjectUnderTestCount>@(_ProjectUnderTestProjectReference->Count())</_ProjectUnderTestCount>
@@ -94,12 +56,13 @@
 
       <_ProjectUnderTestPathRaw>%(_ProjectUnderTestProjectReference.Identity)</_ProjectUnderTestPathRaw>
       <_ProjectUnderTestPath>$([MSBuild]::NormalizePath('$(_ProjectUnderTestPathRaw)'))</_ProjectUnderTestPath>
+      <_StrykerJsonConfigFile>$([MSBuild]::NormalizePath('$(RepositoryEngineeringDir)', 'StrykerNET', 'stryker-config.json'))</_StrykerJsonConfigFile>
 
       <_TestRunner Condition="'%(_FilteredTestToRun.Architecture)'=='x86' And Exists('$(DotNetRoot)x86\dotnet.exe')">$(DotNetRoot)x86\dotnet.exe</_TestRunner>
       <_TestRunner Condition="'$(_TestRunner)'==''">$(DotNetTool)</_TestRunner>
 
        <!-- https://stryker-mutator.io/docs/stryker-net/configuration/#project-information -->
-      <_TestRunnerArgs>stryker --project "$(_ProjectUnderTestPath)" --test-project "$(MSBuildProjectFullPath)" --config-file "$(_UpdatedStrykerJsonPath)" --output "$(_TestResultsDir)"</_TestRunnerArgs>
+      <_TestRunnerArgs>stryker --project "$(_ProjectUnderTestPath)" --test-project "$(MSBuildProjectFullPath)" --config-file "$(_StrykerJsonConfigFile)" --target-framework "$(LatestTargetFramework)" --output "$(_TestResultsDir)"</_TestRunnerArgs>
       <_TestRunnerArgs Condition=" '$(StrykerLogToFile)' == 'true' ">$(_TestRunnerArgs) --log-to-file </_TestRunnerArgs>
 
       <_TestRunnerCommand>"$(_TestRunner)" $(_TestRunnerArgs)</_TestRunnerCommand>
