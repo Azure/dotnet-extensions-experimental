@@ -11,7 +11,7 @@ usage()
 {
   echo "Custom settings:"
   echo "  --testCoverage             Run unit tests and capture code coverage information"
-  echo "  --mutationTest             Run mutation tests"
+  echo "  --mutationTesting             Run mutation testing"
   echo ""
 }
 
@@ -21,7 +21,7 @@ REPO_ROOT=$(realpath $DIR/../)
 hasWarnAsError=false
 configuration=''
 testCoverage=false
-mutationTest=false
+mutationTesting=false
 
 properties=''
 
@@ -51,8 +51,8 @@ while [[ $# > 0 ]]; do
     -testcoverage)
       testCoverage=true
       ;;
-    -mutationtest)
-      mutationTest=true
+    -mutationtesting)
+      mutationTesting=true
       properties="$properties /p:TestRunnerName=StrykerNET"
       ;;
     *)
@@ -69,7 +69,7 @@ if [[ "$hasWarnAsError" == false ]]; then
 fi
 
 # If mutation testing is requested, ensure no incompatible switches supplied
-if [[ "$mutationTest" == true ]]; then
+if [[ "$mutationTesting" == true ]]; then
   unsupportedSwitches=('restore' 'build' 'deploy' 'deploydeps' 'integrationtest' 'performancetest' 'sign' 'pack' 'testcoverage')
   for switch in "${unsupportedSwitches[@]}"; do
     if echo $properties | grep -cswi $switch > /dev/null; then
@@ -95,17 +95,17 @@ if [[ "$mutationTest" == true ]]; then
   export PATH=$DOTNET_ROOT:$PATH
 
   # Create a marker file
-  touch "$REPO_ROOT/.mutationtests"
+  touch "$REPO_ROOT/.mutationtesting"
 
   # Remove the marker upon failure
-  trap 'rm "$REPO_ROOT/.mutationtests"' EXIT
+  trap 'rm "$REPO_ROOT/.mutationtesting"' EXIT
 fi
 
 "$DIR/common/build.sh" $properties
 
 # Remove the marker when we're done
-if [[ "$mutationTest" == true ]]; then
-  [ -e "$REPO_ROOT/.mutationtests" ] && rm -- "$REPO_ROOT/.mutationtests"
+if [[ "$mutationTesting" == true ]]; then
+  [ -e "$REPO_ROOT/.mutationtesting" ] && rm -- "$REPO_ROOT/.mutationtesting"
 fi
 
 # Perform code coverage as the last operation, this enables the following scenarios:

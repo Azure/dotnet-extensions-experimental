@@ -61,9 +61,9 @@ Param(
   [Parameter(ParameterSetName='CommandLine')]
   [switch] $testCoverage,
 
-  # Run mutation tests
+  # Run mutation testing
   [Parameter(ParameterSetName='CommandLine')]
-  [switch] $mutationTest,
+  [switch] $mutationTesting,
 
   [Parameter(ValueFromRemainingArguments=$true)][String[]]$properties
 )
@@ -71,7 +71,7 @@ Param(
 function Print-Usage() {
   Write-Host "Custom settings:"
   Write-Host "  -testCoverage           Run unit tests and capture code coverage information."
-  Write-Host "  -mutationTest           Run mutation tests."
+  Write-Host "  -mutationTesting           Run mutation testing."
   Write-Host ""
 }
 
@@ -84,8 +84,8 @@ if ($help) {
 }
 
 
-# Mutation tests are very special kind of tests and, thus, have to run exclusively
-if ($mutationTest) {
+# Mutation testing is very special kind of testing and, thus, have to run exclusively
+if ($mutationTesting) {
   # Disable incompatible options
   $restore = $false
   $build = $false
@@ -106,7 +106,7 @@ if ($mutationTest) {
   $env:PATH = "$env:DOTNET_ROOT;$env:PATH";
 
   # Create a marker file
-  '' | Out-File .mutationtests
+  '' | Out-File .mutationtesting
 }
 
 try {
@@ -143,8 +143,8 @@ try {
         @properties
 }
 finally {
-  if ($mutationTest) {
-    Remove-Item -Path .mutationtests
+  if ($mutationTesting) {
+    Remove-Item -Path .mutationtesting
   }
 }
 
