@@ -39,7 +39,7 @@
       <_FilteredTestToRun Include="@(TestToRun->WithMetadataValue('TargetFramework', '$(LatestTargetFramework)'))" />
     </ItemGroup>
 
-    <CallTarget Targets="RunMutationTests" 
+    <CallTarget Targets="RunMutationTesting" 
                 Condition=" '@(_ProjectUnderTestProjectReference)' != '' and '@(_FilteredTestToRun)' != '' " />
   </Target>
 
@@ -71,7 +71,7 @@
   </Target>
 
 
-  <Target Name="RunMutationTests" DependsOnTargets="_UpdateStrykerJson">
+  <Target Name="RunMutationTesting" DependsOnTargets="_UpdateStrykerJson">
     <!-- Ensure there is a one-to-one mapping between a test project and a project-under-test -->
     <PropertyGroup>
       <_ProjectUnderTestCount>@(_ProjectUnderTestProjectReference->Count())</_ProjectUnderTestCount>
@@ -79,15 +79,15 @@
     <Error Condition="$(_ProjectUnderTestCount) != 1" Text="There can be only one ProjectUnderTest. Found $(_ProjectUnderTestCount)."/>
 
     <PropertyGroup>
-      <_MutationTestResultsLogDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsLogDir)', 'MutationTestLogs'))</_MutationTestResultsLogDir>
-      <_MutationTestResultsResultsDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsTestResultsDir)', 'MutationTestResults'))</_MutationTestResultsResultsDir>
-      <_TestResultsResultsDir>$([MSBuild]::NormalizePath('$(_MutationTestResultsResultsDir)', '$(MSBuildProjectName)'))</_TestResultsResultsDir>
+      <_MutationTestingResultsLogDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsLogDir)', 'MutationTestingLogs'))</_MutationTestingResultsLogDir>
+      <_MutationTestingResultsDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsTestResultsDir)', 'MutationTestingResults'))</_MutationTestingResultsDir>
+      <_TestResultsDir>$([MSBuild]::NormalizePath('$(_MutationTestingResultsDir)', '$(MSBuildProjectName)'))</_TestResultsDir>
       <_ResultFileNameNoExt>$(MSBuildProjectName)_$(LatestTargetFramework)_$(TestArchitectures)</_ResultFileNameNoExt>
-      <_ResultsStdOutPath>$(_MutationTestResultsLogDir)$(_ResultFileNameNoExt).log</_ResultsStdOutPath>
+      <_ResultsStdOutPath>$(_MutationTestingResultsLogDir)$(_ResultFileNameNoExt).log</_ResultsStdOutPath>
     </PropertyGroup>
 
-    <MakeDir Directories="$(_MutationTestResultsLogDir)"/>
-    <MakeDir Directories="$(_TestResultsResultsDir)"/>
+    <MakeDir Directories="$(_MutationTestingResultsLogDir)"/>
+    <MakeDir Directories="$(_TestResultsDir)"/>
 
     <PropertyGroup>
       <_TestEnvironment>$(LatestTargetFramework)|$(TestArchitectures)</_TestEnvironment>
@@ -99,7 +99,7 @@
       <_TestRunner Condition="'$(_TestRunner)'==''">$(DotNetTool)</_TestRunner>
 
        <!-- https://stryker-mutator.io/docs/stryker-net/configuration/#project-information -->
-      <_TestRunnerArgs>stryker --project "$(_ProjectUnderTestPath)" --test-project "$(MSBuildProjectFullPath)" --config-file "$(_UpdatedStrykerJsonPath)" --output "$(_TestResultsResultsDir)"</_TestRunnerArgs>
+      <_TestRunnerArgs>stryker --project "$(_ProjectUnderTestPath)" --test-project "$(MSBuildProjectFullPath)" --config-file "$(_UpdatedStrykerJsonPath)" --output "$(_TestResultsDir)"</_TestRunnerArgs>
       <_TestRunnerArgs Condition=" '$(StrykerLogToFile)' == 'true' ">$(_TestRunnerArgs) --log-to-file </_TestRunnerArgs>
 
       <_TestRunnerCommand>"$(_TestRunner)" $(_TestRunnerArgs)</_TestRunnerCommand>
@@ -132,13 +132,13 @@
     <!--
       Report test status.
     -->
-    <Message Text="Mutation tests succeeded: $(_ProjectUnderTestPath) [$(_TestEnvironment)]" Condition="'$(_TestErrorCode)' == '0'" Importance="high" />
+    <Message Text="Mutation testing succeeded: $(_ProjectUnderTestPath) [$(_TestEnvironment)]" Condition="'$(_TestErrorCode)' == '0'" Importance="high" />
 
     <!--
       Ideally we would set ContinueOnError="ErrorAndContinue" so that when a test fails in multi-targeted test project
       we'll still run tests for all target frameworks. ErrorAndContinue doesn't work well on Linux though: https://github.com/Microsoft/msbuild/issues/3961.
     -->
-    <Error Text="Mutation tests failed: $(_ResultsStdOutPath) [$(_TestEnvironment)]" Condition="'$(_TestErrorCode)' != '0' and '$(_ErrorOnTestFailure)' != 'false'" File="Stryker.NET" />
+    <Error Text="Mutation testing failed: $(_ResultsStdOutPath) [$(_TestEnvironment)]" Condition="'$(_TestErrorCode)' != '0' and '$(_ErrorOnTestFailure)' != 'false'" File="Stryker.NET" />
   </Target>
 
 </Project>
