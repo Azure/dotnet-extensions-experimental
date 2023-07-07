@@ -1,132 +1,128 @@
 <Dependencies>
   <ProductDependencies>
-    <Dependency Name="Microsoft.Bcl.TimeProvider" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Bcl.TimeProvider" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Configuration" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Configuration" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Configuration.Binder" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Configuration.Binder" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Configuration.Json" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Configuration.Json" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.DependencyInjection" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.DependencyInjection" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Hosting" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Hosting" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Http" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Http" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Logging.Console" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Logging.Console" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Options" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Options" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Primitives" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Primitives" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="System.Text.Json" Version="8.0.0-preview.6.23314.15" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="System.Text.Json" Version="8.0.0-preview.6.23329.7" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>171a525880315369e48c6adf6c181f98357352a5</Sha>
+      <Sha>5340be2ccc67101dc890c9f1b0ec57470b685f3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0-preview.6.23315.13" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0-preview.6.23329.11" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/aspnetcore</Uri>
-      <Sha>d1f00b02ef24762bca23653fd963629749743334</Sha>
+      <Sha>fb4b5a21ebd67b31fff4ddf5c039181da504c932</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0-preview.6.23315.13" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0-preview.6.23329.11" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/aspnetcore</Uri>
-      <Sha>d1f00b02ef24762bca23653fd963629749743334</Sha>
+      <Sha>fb4b5a21ebd67b31fff4ddf5c039181da504c932</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.AspNetCore.HeaderParsing" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.AspNetCore.HeaderParsing" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Compliance.Testing" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.Compliance.Testing" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.EnumStrings" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.EnumStrings" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Hosting.Testing" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.Hosting.Testing" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Hosting.Testing.StartupInitialization" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.Hosting.Testing.StartupInitialization" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Http.Resilience" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.Http.Resilience" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Http.Telemetry" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.Http.Telemetry" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Options.ValidateOnStart" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.Options.ValidateOnStart" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Options.Validation" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.Telemetry" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Telemetry" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.Telemetry.Abstractions" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Telemetry.Abstractions" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.Telemetry.Testing" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Telemetry.Testing" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="Microsoft.Extensions.TimeProvider.Testing" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.TimeProvider.Testing" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="System.Cloud.DocumentDb.Abstractions" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
-    <Dependency Name="System.Cloud.DocumentDb.Abstractions" Version="8.0.0-preview.6.23320.7">
+    <Dependency Name="System.Cloud.Messaging" Version="8.0.0-preview.6.23352.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
-    </Dependency>
-    <Dependency Name="System.Cloud.Messaging" Version="8.0.0-preview.6.23320.7">
-      <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>f1314c895723aba7adfe9f237ba329d9a5ea7618</Sha>
+      <Sha>9dba06fa9f0192510e42ccae3ebafbbbd2aac352</Sha>
     </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>
