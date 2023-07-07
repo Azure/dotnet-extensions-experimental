@@ -71,7 +71,7 @@ Param(
 function Print-Usage() {
   Write-Host "Custom settings:"
   Write-Host "  -testCoverage           Run unit tests and capture code coverage information."
-  Write-Host "  -mutationTesting           Run mutation testing."
+  Write-Host "  -mutationTesting        Run mutation testing."
   Write-Host ""
 }
 

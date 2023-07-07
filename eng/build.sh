@@ -11,7 +11,7 @@ usage()
 {
   echo "Custom settings:"
   echo "  --testCoverage             Run unit tests and capture code coverage information"
-  echo "  --mutationTesting             Run mutation testing"
+  echo "  --mutationTesting          Run mutation testing"
   echo ""
 }
 
