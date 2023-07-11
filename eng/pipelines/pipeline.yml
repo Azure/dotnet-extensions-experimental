@@ -55,6 +55,8 @@ variables:
 
   - name: SkipQualityGates
     value: false
+  - name: PublishMutationTestingResults
+    value: false
 
   - name: runAsPublic
     value: ${{ eq(variables['System.TeamProject'], 'public') }}
