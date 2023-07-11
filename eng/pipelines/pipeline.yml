@@ -310,9 +310,9 @@ stages:
               isWindows: false
 
       # ----------------------------------------------------------------
-      # This job runs mutation tests using Stryker.NET
+      # This job runs mutation testing using Stryker.NET
       # ----------------------------------------------------------------
-      - job: MutationTests
+      - job: MutationTesting
         timeoutInMinutes: 180
 
         pool:
@@ -334,7 +334,7 @@ stages:
             fetchDepth: 1
 
         steps:
-          - template: /eng/pipelines/templates/MutationTests.yml
+          - template: /eng/pipelines/templates/MutationTesting.yml
             parameters:
               buildScript: $(_buildScript)
               buildConfig: $(_BuildConfig)
