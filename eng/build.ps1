@@ -145,7 +145,6 @@ try {
 finally {
   if ($mutationTesting) {
     Remove-Item -Path .mutationtesting
-    Remove-Item -Path .targetframeworks
   }
 }
 
