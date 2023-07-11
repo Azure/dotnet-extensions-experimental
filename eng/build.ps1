@@ -145,6 +145,13 @@ try {
 finally {
   if ($mutationTesting) {
     Remove-Item -Path .mutationtesting
+
+    $testResultPath = "./artifacts/TestResults/$configuration";
+
+    # Merge JSON reports
+
+    # Open HTML report
+    Start-Process $testResultPath/..../mutation-report.html
   }
 }
 
