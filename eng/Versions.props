@@ -25,40 +25,40 @@
   -->
   <PropertyGroup Label="Automated">
     <!-- Dependencies from https://github.com/dotnet/extensions -->
-    <MicrosoftAspNetCoreHeaderParsingVersion>8.0.0-preview.7.23361.1</MicrosoftAspNetCoreHeaderParsingVersion>
-    <MicrosoftExtensionsComplianceTestingVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsComplianceTestingVersion>
-    <MicrosoftExtensionsEnumStringsVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsEnumStringsVersion>
-    <MicrosoftExtensionsHostingTestingStartupInitializationVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsHostingTestingStartupInitializationVersion>
-    <MicrosoftExtensionsHostingTestingVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsHostingTestingVersion>
-    <MicrosoftExtensionsHttpResilienceVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsHttpResilienceVersion>
-    <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsHttpTelemetryVersion>
+    <MicrosoftAspNetCoreHeaderParsingVersion>8.0.0-preview.7.23362.4</MicrosoftAspNetCoreHeaderParsingVersion>
+    <MicrosoftExtensionsComplianceTestingVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsComplianceTestingVersion>
+    <MicrosoftExtensionsEnumStringsVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsEnumStringsVersion>
+    <MicrosoftExtensionsHostingTestingStartupInitializationVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsHostingTestingStartupInitializationVersion>
+    <MicrosoftExtensionsHostingTestingVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsHostingTestingVersion>
+    <MicrosoftExtensionsHttpResilienceVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsHttpResilienceVersion>
+    <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsHttpTelemetryVersion>
     <MicrosoftExtensionsOptionsValidationVersion>8.0.0-preview.7.23326.2</MicrosoftExtensionsOptionsValidationVersion>
-    <MicrosoftExtensionsTelemetryAbstractionsVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsTelemetryAbstractionsVersion>
-    <MicrosoftExtensionsTelemetryTestingVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsTelemetryTestingVersion>
-    <MicrosoftExtensionsTelemetryVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsTelemetryVersion>
-    <MicrosoftExtensionsTimeProviderTestingVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsTimeProviderTestingVersion>
-    <MicrosoftExtensionsOptionsValidateOnStartVersion>8.0.0-preview.7.23361.1</MicrosoftExtensionsOptionsValidateOnStartVersion>
-    <SystemCloudDocumentDbAbstractionsVersion>8.0.0-preview.7.23361.1</SystemCloudDocumentDbAbstractionsVersion>
-    <SystemCloudMessagingVersion>8.0.0-preview.7.23361.1</SystemCloudMessagingVersion>
+    <MicrosoftExtensionsTelemetryAbstractionsVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsTelemetryAbstractionsVersion>
+    <MicrosoftExtensionsTelemetryTestingVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsTelemetryTestingVersion>
+    <MicrosoftExtensionsTelemetryVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsTelemetryVersion>
+    <MicrosoftExtensionsTimeProviderTestingVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsTimeProviderTestingVersion>
+    <MicrosoftExtensionsOptionsValidateOnStartVersion>8.0.0-preview.7.23362.4</MicrosoftExtensionsOptionsValidateOnStartVersion>
+    <SystemCloudDocumentDbAbstractionsVersion>8.0.0-preview.7.23362.4</SystemCloudDocumentDbAbstractionsVersion>
+    <SystemCloudMessagingVersion>8.0.0-preview.7.23362.4</SystemCloudMessagingVersion>
     <!-- Dependencies from https://github.com/dotnet/runtime -->
-    <MicrosoftBclTimeProviderVersion>8.0.0-preview.7.23355.1</MicrosoftBclTimeProviderVersion>
-    <MicrosoftExtensionsConfigurationAbstractionsVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsConfigurationAbstractionsVersion>
-    <MicrosoftExtensionsConfigurationBinderVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsConfigurationBinderVersion>
-    <MicrosoftExtensionsConfigurationJsonVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsConfigurationJsonVersion>
-    <MicrosoftExtensionsConfigurationVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsConfigurationVersion>
-    <MicrosoftExtensionsDependencyInjectionAbstractionsVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsDependencyInjectionAbstractionsVersion>
-    <MicrosoftExtensionsDependencyInjectionVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsDependencyInjectionVersion>
-    <MicrosoftExtensionsHostingAbstractionsVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsHostingAbstractionsVersion>
-    <MicrosoftExtensionsHostingVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsHostingVersion>
-    <MicrosoftExtensionsHttpVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsHttpVersion>
-    <MicrosoftExtensionsLoggingConsoleVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsLoggingConsoleVersion>
-    <MicrosoftExtensionsOptionsConfigurationExtensionsVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsOptionsConfigurationExtensionsVersion>
-    <MicrosoftExtensionsOptionsVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsOptionsVersion>
-    <MicrosoftExtensionsPrimitivesVersion>8.0.0-preview.7.23355.1</MicrosoftExtensionsPrimitivesVersion>
-    <SystemTextJsonVersion>8.0.0-preview.7.23355.1</SystemTextJsonVersion>
+    <MicrosoftBclTimeProviderVersion>8.0.0-preview.7.23360.15</MicrosoftBclTimeProviderVersion>
+    <MicrosoftExtensionsConfigurationAbstractionsVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsConfigurationAbstractionsVersion>
+    <MicrosoftExtensionsConfigurationBinderVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsConfigurationBinderVersion>
+    <MicrosoftExtensionsConfigurationJsonVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsConfigurationJsonVersion>
+    <MicrosoftExtensionsConfigurationVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsConfigurationVersion>
+    <MicrosoftExtensionsDependencyInjectionAbstractionsVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsDependencyInjectionAbstractionsVersion>
+    <MicrosoftExtensionsDependencyInjectionVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsDependencyInjectionVersion>
+    <MicrosoftExtensionsHostingAbstractionsVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsHostingAbstractionsVersion>
+    <MicrosoftExtensionsHostingVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsHostingVersion>
+    <MicrosoftExtensionsHttpVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsHttpVersion>
+    <MicrosoftExtensionsLoggingConsoleVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsLoggingConsoleVersion>
+    <MicrosoftExtensionsOptionsConfigurationExtensionsVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsOptionsConfigurationExtensionsVersion>
+    <MicrosoftExtensionsOptionsVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsOptionsVersion>
+    <MicrosoftExtensionsPrimitivesVersion>8.0.0-preview.7.23360.15</MicrosoftExtensionsPrimitivesVersion>
+    <SystemTextJsonVersion>8.0.0-preview.7.23360.15</SystemTextJsonVersion>
     <!-- Dependencies from https://github.com/aspnet/AspNetCore -->
-    <MicrosoftAspNetCoreMvcTestingVersion>8.0.0-preview.7.23357.2</MicrosoftAspNetCoreMvcTestingVersion>
-    <MicrosoftExtensionsDiagnosticsHealthChecksVersion>8.0.0-preview.7.23357.2</MicrosoftExtensionsDiagnosticsHealthChecksVersion>
+    <MicrosoftAspNetCoreMvcTestingVersion>8.0.0-preview.7.23362.3</MicrosoftAspNetCoreMvcTestingVersion>
+    <MicrosoftExtensionsDiagnosticsHealthChecksVersion>8.0.0-preview.7.23362.3</MicrosoftExtensionsDiagnosticsHealthChecksVersion>
   </PropertyGroup>
   <!--
 
