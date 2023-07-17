@@ -17,7 +17,6 @@
     <PackageVersion Include="Microsoft.Extensions.Options" Version="$(MicrosoftExtensionsOptionsVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(MicrosoftExtensionsOptionsConfigurationExtensionsVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Options.ValidateOnStart" Version="$(MicrosoftExtensionsOptionsValidateOnStartVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Options.Validation" Version="$(MicrosoftExtensionsOptionsValidationVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Primitives" Version="$(MicrosoftExtensionsPrimitivesVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Telemetry" Version="$(MicrosoftExtensionsTelemetryVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Telemetry.Abstractions" Version="$(MicrosoftExtensionsTelemetryAbstractionsVersion)" />

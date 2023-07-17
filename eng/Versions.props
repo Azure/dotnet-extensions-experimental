@@ -32,7 +32,6 @@
     <MicrosoftExtensionsHostingTestingVersion>8.0.0-preview.7.23363.2</MicrosoftExtensionsHostingTestingVersion>
     <MicrosoftExtensionsHttpResilienceVersion>8.0.0-preview.7.23363.2</MicrosoftExtensionsHttpResilienceVersion>
     <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-preview.7.23363.2</MicrosoftExtensionsHttpTelemetryVersion>
-    <MicrosoftExtensionsOptionsValidationVersion>8.0.0-preview.7.23326.2</MicrosoftExtensionsOptionsValidationVersion>
     <MicrosoftExtensionsTelemetryAbstractionsVersion>8.0.0-preview.7.23363.2</MicrosoftExtensionsTelemetryAbstractionsVersion>
     <MicrosoftExtensionsTelemetryTestingVersion>8.0.0-preview.7.23363.2</MicrosoftExtensionsTelemetryTestingVersion>
     <MicrosoftExtensionsTelemetryVersion>8.0.0-preview.7.23363.2</MicrosoftExtensionsTelemetryVersion>

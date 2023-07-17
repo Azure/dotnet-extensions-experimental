@@ -20,7 +20,6 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
     <PackageReference Include="Microsoft.Extensions.Options.ValidateOnStart" />
-    <PackageReference Include="Microsoft.Extensions.Options.Validation" />
     <PackageReference Include="Microsoft.ServiceFabric" />
   </ItemGroup>
 
