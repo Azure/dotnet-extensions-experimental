@@ -18,7 +18,7 @@ public static class TelemetryAzureExtensions
     /// </summary>
     /// <param name="services"><see cref="IServiceCollection"/> object instance.</param>
     /// <returns><see cref="IServiceCollection"/> object for chaining.</returns>
-    [Experimental]
+    [Experimental(diagnosticId: "TBD", UrlFormat = WarningDefinitions.SharedUrlFormat)]
     public static IServiceCollection AddAzureCosmosDBDownstreamDependencyMetadata(this IServiceCollection services)
     {
         _ = Throw.IfNull(services);
@@ -30,7 +30,7 @@ public static class TelemetryAzureExtensions
     /// </summary>
     /// <param name="services"><see cref="IServiceCollection"/> object instance.</param>
     /// <returns><see cref="IServiceCollection"/> object for chaining.</returns>
-    [Experimental]
+    [Experimental(diagnosticId: "TBD", UrlFormat = WarningDefinitions.SharedUrlFormat)]
     public static IServiceCollection AddAzureSearchDownstreamDependencyMetadata(this IServiceCollection services)
     {
         _ = Throw.IfNull(services);
