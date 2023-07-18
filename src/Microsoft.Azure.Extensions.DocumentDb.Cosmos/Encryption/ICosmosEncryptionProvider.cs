@@ -56,7 +56,7 @@ public interface ICosmosEncryptionProvider
     /// <param name="container">The cosmos container.</param>
     /// <param name="queryable">The queryable to convert.</param>
     /// <returns>The feed iterator.</returns>
-    [Experimental]
+    [Experimental(diagnosticId: "TBD", UrlFormat = WarningDefinitions.SharedUrlFormat)]
     FeedIterator<TDocument> ToEncryptionFeedIterator<TDocument>(Container container, IQueryable<TDocument> queryable);
 
     /// <summary>

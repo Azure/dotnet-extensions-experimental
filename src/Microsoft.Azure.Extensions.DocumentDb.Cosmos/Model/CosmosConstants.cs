@@ -8,7 +8,7 @@ namespace Microsoft.Azure.Extensions.Document.Cosmos;
 /// <summary>
 /// Contains Cosmos DB related constants.
 /// </summary>
-[Experimental]
+[Experimental(diagnosticId: "TBD", UrlFormat = WarningDefinitions.SharedUrlFormat)]
 public static class CosmosConstants
 {
     /// <summary>
@@ -17,6 +17,6 @@ public static class CosmosConstants
     /// <remarks>
     /// This constant should be used when one of the partition key components has no value.
     /// </remarks>
-    [Experimental]
+    [Experimental(diagnosticId: "TBD", UrlFormat = WarningDefinitions.SharedUrlFormat)]
     public static readonly object NoPartitionKey = new();
 }

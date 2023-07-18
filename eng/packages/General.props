@@ -17,7 +17,6 @@
     <PackageVersion Include="Microsoft.Extensions.Options" Version="$(MicrosoftExtensionsOptionsVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(MicrosoftExtensionsOptionsConfigurationExtensionsVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Options.ValidateOnStart" Version="$(MicrosoftExtensionsOptionsValidateOnStartVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Options.Validation" Version="$(MicrosoftExtensionsOptionsValidationVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Primitives" Version="$(MicrosoftExtensionsPrimitivesVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Telemetry" Version="$(MicrosoftExtensionsTelemetryVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Telemetry.Abstractions" Version="$(MicrosoftExtensionsTelemetryAbstractionsVersion)" />
@@ -39,7 +38,7 @@
   <ItemGroup>
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.5.22" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.52.0.60960" />
-    <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.435" />
+    <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.507" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net462'">
