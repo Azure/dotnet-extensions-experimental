@@ -5,8 +5,8 @@ param(
 
 $jsonSample = Get-Content $PSScriptRoot\report-sample.json
 $htmlSample = Get-Content $PSScriptRoot\report-sample.html
-$jsonReportPath = Join-Path -Path $ReportsRoot -ChildPath "mutation-report.json"
-$htmlReportPath = Join-Path -Path $ReportsRoot -ChildPath "mutation-report.html"
+$jsonReportPath = Join-Path -Path $ReportsRoot -ChildPath "final-mutation-report.json"
+$htmlReportPath = Join-Path -Path $ReportsRoot -ChildPath "final-mutation-report.html"
 $reportNamePattern = 'mutation-report.json'
 
 function Get-FileStats ($jsonFile) {
