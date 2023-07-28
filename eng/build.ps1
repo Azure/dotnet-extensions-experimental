@@ -146,12 +146,13 @@ finally {
   if ($mutationTesting) {
     Remove-Item -Path .mutationtesting
 
-    $testResultPath = "./artifacts/TestResults/$configuration";
+    $testResultsPath = "./artifacts/TestResults/$configuration/MutationTestingResults";
 
-    # Merge JSON reports
+    # Merge mutation reports
+    . ./eng/StrykerNET/MergeMutationReports.ps1 $testResultsPath
 
     # Open HTML report
-    Start-Process $testResultPath/..../mutation-report.html
+    Start-Process $testResultsPath/mutation-report.html
   }
 }
 
