@@ -152,7 +152,7 @@ finally {
     . ./eng/StrykerNET/MergeMutationReports.ps1 $testResultsPath
 
     # Open HTML report
-    Start-Process $testResultsPath/mutation-report.html
+    Start-Process $testResultsPath/final-mutation-report.html
   }
 }
 
