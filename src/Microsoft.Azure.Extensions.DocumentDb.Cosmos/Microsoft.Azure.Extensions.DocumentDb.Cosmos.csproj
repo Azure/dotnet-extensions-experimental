@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <NoWarn>$(NoWarn);EXTEXP0011</NoWarn>
     <Stage>normal</Stage>
     <MinCodeCoverage>100</MinCodeCoverage>
     <!-- Require CosmosDB emulator. See https://github.com/Azure/dotnet-extensions-experimental/issues/20 -->
