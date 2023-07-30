@@ -26,7 +26,7 @@ steps:
     - task: PublishMutationReport@1
       displayName: Publish Mutation Reports
       inputs:
-        reportPattern: '${{ parameters.repoTestResultsPath }}/**/final-mutation-report.html'
+        reportPattern: '${{ parameters.repoTestResultsPath }}/**/mutation-report-merged.html'
       continueOnError: true
       condition: always()
 

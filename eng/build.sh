@@ -106,6 +106,14 @@ fi
 # Remove the marker when we're done
 if [[ "$mutationTesting" == true ]]; then
   [ -e "$REPO_ROOT/.mutationtesting" ] && rm -- "$REPO_ROOT/.mutationtesting"
+
+  testResultsPath="$REPO_ROOT/artifacts/TestResults/$configuration/MutationTestingResults";
+
+  # Merge mutation reports
+  $REPO_ROOT/.dotnet/dotnet pwsh collect $REPO_ROOT/eng/StrykerNET/MergeMutationReports.ps1 $testResultsPath
+  echo ""
+  echo -e "\e[32mCode coverage results:\e[0m $testResultPath/mutation-report-merged.html"
+  echo ""
 fi
 
 # Perform code coverage as the last operation, this enables the following scenarios:
