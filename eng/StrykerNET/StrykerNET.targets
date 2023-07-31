@@ -34,14 +34,6 @@
   </Target>
 
   <Target Name="RunMutationTesting">
-
-    <PropertyGroup>
-      <_OnlyTfmPath>$([MSBuild]::NormalizePath('$(RepoRoot)', '.targetframeworks'))</_OnlyTfmPath>
-    </PropertyGroup>
-    <WriteLinesToFile File="$(_OnlyTfmPath)"
-                      Overwrite="true"
-                      Lines="$(LatestTargetFramework)" />
-
     <!-- Ensure there is a one-to-one mapping between a test project and a project-under-test -->
     <PropertyGroup>
       <_ProjectUnderTestCount>@(_ProjectUnderTestProjectReference->Count())</_ProjectUnderTestCount>

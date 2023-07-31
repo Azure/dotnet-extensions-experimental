@@ -109,6 +109,7 @@ if ($mutationTesting) {
 
   # Create a marker file
   '' | Out-File .mutationtesting
+  'net8.0' | Out-File .targetframeworks
 }
 
 try {
