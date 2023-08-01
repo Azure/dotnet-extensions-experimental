@@ -7,7 +7,6 @@
       "ignore-methods": [
         "*Exception.ctor",
         "ConfigureAwait",
-        "Dispose",
         "Throw.*",
         "ValidationResult.ctor"
       ],
