@@ -315,7 +315,7 @@ stages:
       # This job runs mutation testing using Stryker.NET
       # ----------------------------------------------------------------
       - job: MutationTesting
-        timeoutInMinutes: 180
+        timeoutInMinutes: 30
 
         pool:
           ${{ if eq(variables['runAsPublic'], 'true') }}:
@@ -328,38 +328,6 @@ stages:
 
         variables:
           - _buildScript: $(Build.SourcesDirectory)/build.cmd -ci -NativeToolsOnMachine
-
-        preSteps:
-          - checkout: self
-            clean: true
-            persistCredentials: true
-            fetchDepth: 1
-
-        steps:
-          - template: /eng/pipelines/templates/MutationTesting.yml
-            parameters:
-              buildScript: $(_buildScript)
-              buildConfig: $(_BuildConfig)
-              repoLogPath: $(Build.Arcade.LogsPath)
-              repoTestResultsPath: $(Build.Arcade.TestResultsPath)
-
-      # ----------------------------------------------------------------
-      # This job runs mutation testing using Stryker.NET
-      # ----------------------------------------------------------------
-      - job: MutationTestingUbuntu
-        timeoutInMinutes: 180
-
-        pool:
-          ${{ if eq(variables['runAsPublic'], 'true') }}:
-            name: $(DncEngPublicBuildPool)
-            demands: ImageOverride -equals build.ubuntu.2004.amd64.open
-          # Non-public (i.e., official builds)
-          ${{ else }}:
-            name: $(DncEngInternalBuildPool)
-            demands: ImageOverride -equals build.ubuntu.2004.amd64
-
-        variables:
-          - _buildScript: $(Build.SourcesDirectory)/build.sh --ci
 
         preSteps:
           - checkout: self
