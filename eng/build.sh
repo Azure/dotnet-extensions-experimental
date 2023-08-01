@@ -113,7 +113,7 @@ if [[ "$mutationTesting" == true ]]; then
   # Merge mutation reports
   $REPO_ROOT/.dotnet/dotnet pwsh collect $REPO_ROOT/eng/StrykerNET/MergeMutationReports.ps1 $testResultsPath
   echo ""
-  echo -e "\e[32mCode coverage results:\e[0m $testResultPath/mutation-report-merged.html"
+  echo -e "\e[32mMutation testing results:\e[0m $testResultPath/mutation-report-merged.html"
   echo ""
 fi
 
