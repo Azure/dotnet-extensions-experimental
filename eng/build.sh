@@ -96,9 +96,10 @@ if [[ "$mutationTesting" == true ]]; then
 
   # Create a marker file
   touch "$REPO_ROOT/.mutationtesting"
+  echo 'net8.0' > "$REPO_ROOT/.targetframeworks"
 
   # Remove the marker upon failure
-  trap 'rm "$REPO_ROOT/.mutationtesting"' EXIT
+  trap 'rm "$REPO_ROOT/.targetframeworks" && rm "$REPO_ROOT/.mutationtesting"' EXIT
 fi
 
 "$DIR/common/build.sh" $properties
