@@ -60,69 +60,69 @@
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>bcb608e3d21344a0bb7c3399f060143504bbf475</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0-rc.1.23381.20" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0-rc.1.23401.14" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/aspnetcore</Uri>
-      <Sha>c64d745c863088e6bb6390984b7fe93782e686c3</Sha>
+      <Sha>6a0dc6453864aecef674eb2dda5efb93237da8ab</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0-rc.1.23381.20" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
+    <Dependency Name="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0-rc.1.23401.14" CoherentParentDependency="Microsoft.AspNetCore.HeaderParsing">
       <Uri>https://github.com/dotnet/aspnetcore</Uri>
-      <Sha>c64d745c863088e6bb6390984b7fe93782e686c3</Sha>
+      <Sha>6a0dc6453864aecef674eb2dda5efb93237da8ab</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.AspNetCore.HeaderParsing" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.AspNetCore.HeaderParsing" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Compliance.Testing" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.Extensions.Compliance.Testing" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.EnumStrings" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.Extensions.EnumStrings" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Hosting.Testing" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.Extensions.Hosting.Testing" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
     <Dependency Name="Microsoft.Extensions.Hosting.Testing.StartupInitialization" Version="8.0.0-rc.1.23376.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
       <Sha>36a5595eb2631586b10afa039b03b3236fa0b33a</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Http.Resilience" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.Extensions.Http.Resilience" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Http.Telemetry" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.Extensions.Http.Telemetry" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Options.ValidateOnStart" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.Extensions.Options.ValidateOnStart" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Telemetry" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.Extensions.Telemetry" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Telemetry.Abstractions" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.Extensions.Telemetry.Abstractions" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Telemetry.Testing" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.Extensions.Telemetry.Testing" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.TimeProvider.Testing" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="Microsoft.Extensions.TimeProvider.Testing" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="System.Cloud.DocumentDb.Abstractions" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="System.Cloud.DocumentDb.Abstractions" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
-    <Dependency Name="System.Cloud.Messaging" Version="8.0.0-rc.1.23401.5">
+    <Dependency Name="System.Cloud.Messaging" Version="8.0.0-rc.1.23402.3">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
+      <Sha>44357be1ef347d3b6cacf3fdd3da62526e71b9fb</Sha>
     </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>
