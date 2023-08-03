@@ -8,7 +8,6 @@ using Microsoft.Azure.Extensions.Cosmos.DocumentStorage;
 using Microsoft.Azure.Extensions.Document.Cosmos.Decoration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting.Testing;
 using Microsoft.Extensions.Options;
 using Microsoft.Shared.Diagnostics;
 using Polly;

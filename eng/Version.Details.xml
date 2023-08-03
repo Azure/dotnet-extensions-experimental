@@ -84,10 +84,6 @@
       <Uri>https://github.com/dotnet/extensions</Uri>
       <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Hosting.Testing.StartupInitialization" Version="8.0.0-rc.1.23376.1">
-      <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>36a5595eb2631586b10afa039b03b3236fa0b33a</Sha>
-    </Dependency>
     <Dependency Name="Microsoft.Extensions.Http.Resilience" Version="8.0.0-rc.1.23401.5">
       <Uri>https://github.com/dotnet/extensions</Uri>
       <Sha>c2c3ae7e797bb1feac7737ba81579164d6d34841</Sha>

@@ -28,7 +28,6 @@
     <MicrosoftAspNetCoreHeaderParsingVersion>8.0.0-rc.1.23401.5</MicrosoftAspNetCoreHeaderParsingVersion>
     <MicrosoftExtensionsComplianceTestingVersion>8.0.0-rc.1.23401.5</MicrosoftExtensionsComplianceTestingVersion>
     <MicrosoftExtensionsEnumStringsVersion>8.0.0-rc.1.23401.5</MicrosoftExtensionsEnumStringsVersion>
-    <MicrosoftExtensionsHostingTestingStartupInitializationVersion>8.0.0-rc.1.23376.1</MicrosoftExtensionsHostingTestingStartupInitializationVersion>
     <MicrosoftExtensionsHostingTestingVersion>8.0.0-rc.1.23401.5</MicrosoftExtensionsHostingTestingVersion>
     <MicrosoftExtensionsHttpResilienceVersion>8.0.0-rc.1.23401.5</MicrosoftExtensionsHttpResilienceVersion>
     <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-rc.1.23401.5</MicrosoftExtensionsHttpTelemetryVersion>
