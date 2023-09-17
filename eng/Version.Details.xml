@@ -68,53 +68,53 @@
       <Uri>https://github.com/dotnet/aspnetcore</Uri>
       <Sha>1c9cf676af5f3bb0ec631305804d4a1747e432d2</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.AspNetCore.HeaderParsing" Version="8.0.0-rc.2.23465.4">
+    <Dependency Name="Microsoft.AspNetCore.HeaderParsing" Version="8.0.0-rc.2.23466.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>44d31ce3652147aabe466b4ac5d4c6f348eb3def</Sha>
+      <Sha>31ac3989342f4da2f768a718ab95a4ffc0143a48</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Compliance.Testing" Version="8.0.0-rc.2.23465.4">
+    <Dependency Name="Microsoft.Extensions.Compliance.Testing" Version="8.0.0-rc.2.23466.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>44d31ce3652147aabe466b4ac5d4c6f348eb3def</Sha>
+      <Sha>31ac3989342f4da2f768a718ab95a4ffc0143a48</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.EnumStrings" Version="8.0.0-rc.2.23465.4">
+    <Dependency Name="Microsoft.Extensions.EnumStrings" Version="8.0.0-rc.2.23466.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>44d31ce3652147aabe466b4ac5d4c6f348eb3def</Sha>
+      <Sha>31ac3989342f4da2f768a718ab95a4ffc0143a48</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Hosting.Testing" Version="8.0.0-rc.2.23465.4">
+    <Dependency Name="Microsoft.Extensions.Hosting.Testing" Version="8.0.0-rc.2.23466.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>44d31ce3652147aabe466b4ac5d4c6f348eb3def</Sha>
+      <Sha>31ac3989342f4da2f768a718ab95a4ffc0143a48</Sha>
     </Dependency>
     <Dependency Name="Microsoft.Extensions.Hosting.Testing.StartupInitialization" Version="8.0.0-rc.1.23376.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
       <Sha>36a5595eb2631586b10afa039b03b3236fa0b33a</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Http.Resilience" Version="8.0.0-rc.2.23465.4">
+    <Dependency Name="Microsoft.Extensions.Http.Resilience" Version="8.0.0-rc.2.23466.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>44d31ce3652147aabe466b4ac5d4c6f348eb3def</Sha>
+      <Sha>31ac3989342f4da2f768a718ab95a4ffc0143a48</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Http.Telemetry" Version="8.0.0-rc.2.23465.4">
+    <Dependency Name="Microsoft.Extensions.Http.Telemetry" Version="8.0.0-rc.2.23466.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>44d31ce3652147aabe466b4ac5d4c6f348eb3def</Sha>
+      <Sha>31ac3989342f4da2f768a718ab95a4ffc0143a48</Sha>
     </Dependency>
     <Dependency Name="Microsoft.Extensions.Options.ValidateOnStart" Version="8.0.0-rc.1.23410.8">
       <Uri>https://github.com/dotnet/extensions</Uri>
       <Sha>6b95e197d3500a22151c1d8c1b851c56aae31740</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Telemetry" Version="8.0.0-rc.2.23465.4">
+    <Dependency Name="Microsoft.Extensions.Telemetry" Version="8.0.0-rc.2.23466.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>44d31ce3652147aabe466b4ac5d4c6f348eb3def</Sha>
+      <Sha>31ac3989342f4da2f768a718ab95a4ffc0143a48</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Telemetry.Abstractions" Version="8.0.0-rc.2.23465.4">
+    <Dependency Name="Microsoft.Extensions.Telemetry.Abstractions" Version="8.0.0-rc.2.23466.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>44d31ce3652147aabe466b4ac5d4c6f348eb3def</Sha>
+      <Sha>31ac3989342f4da2f768a718ab95a4ffc0143a48</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.Telemetry.Testing" Version="8.0.0-rc.2.23465.4">
+    <Dependency Name="Microsoft.Extensions.Telemetry.Testing" Version="8.0.0-rc.2.23466.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>44d31ce3652147aabe466b4ac5d4c6f348eb3def</Sha>
+      <Sha>31ac3989342f4da2f768a718ab95a4ffc0143a48</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Extensions.TimeProvider.Testing" Version="8.0.0-rc.2.23465.4">
+    <Dependency Name="Microsoft.Extensions.TimeProvider.Testing" Version="8.0.0-rc.2.23466.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
-      <Sha>44d31ce3652147aabe466b4ac5d4c6f348eb3def</Sha>
+      <Sha>31ac3989342f4da2f768a718ab95a4ffc0143a48</Sha>
     </Dependency>
     <Dependency Name="System.Cloud.DocumentDb.Abstractions" Version="8.0.0-rc.2.23417.1">
       <Uri>https://github.com/dotnet/extensions</Uri>
