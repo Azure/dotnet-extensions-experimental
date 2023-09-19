@@ -25,17 +25,17 @@
   -->
   <PropertyGroup Label="Automated">
     <!-- Dependencies from https://github.com/dotnet/extensions -->
-    <MicrosoftAspNetCoreHeaderParsingVersion>8.0.0-rc.2.23467.3</MicrosoftAspNetCoreHeaderParsingVersion>
-    <MicrosoftExtensionsComplianceTestingVersion>8.0.0-rc.2.23467.3</MicrosoftExtensionsComplianceTestingVersion>
-    <MicrosoftExtensionsEnumStringsVersion>8.0.0-rc.2.23467.3</MicrosoftExtensionsEnumStringsVersion>
+    <MicrosoftAspNetCoreHeaderParsingVersion>8.0.0-rtm.23468.5</MicrosoftAspNetCoreHeaderParsingVersion>
+    <MicrosoftExtensionsComplianceTestingVersion>8.0.0-rtm.23468.5</MicrosoftExtensionsComplianceTestingVersion>
+    <MicrosoftExtensionsEnumStringsVersion>8.0.0-rtm.23468.5</MicrosoftExtensionsEnumStringsVersion>
     <MicrosoftExtensionsHostingTestingStartupInitializationVersion>8.0.0-rc.1.23376.1</MicrosoftExtensionsHostingTestingStartupInitializationVersion>
-    <MicrosoftExtensionsHostingTestingVersion>8.0.0-rc.2.23467.3</MicrosoftExtensionsHostingTestingVersion>
-    <MicrosoftExtensionsHttpResilienceVersion>8.0.0-rc.2.23467.3</MicrosoftExtensionsHttpResilienceVersion>
-    <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-rc.2.23467.3</MicrosoftExtensionsHttpTelemetryVersion>
-    <MicrosoftExtensionsTelemetryAbstractionsVersion>8.0.0-rc.2.23467.3</MicrosoftExtensionsTelemetryAbstractionsVersion>
-    <MicrosoftExtensionsTelemetryTestingVersion>8.0.0-rc.2.23467.3</MicrosoftExtensionsTelemetryTestingVersion>
-    <MicrosoftExtensionsTelemetryVersion>8.0.0-rc.2.23467.3</MicrosoftExtensionsTelemetryVersion>
-    <MicrosoftExtensionsTimeProviderTestingVersion>8.0.0-rc.2.23467.3</MicrosoftExtensionsTimeProviderTestingVersion>
+    <MicrosoftExtensionsHostingTestingVersion>8.0.0-rtm.23468.5</MicrosoftExtensionsHostingTestingVersion>
+    <MicrosoftExtensionsHttpResilienceVersion>8.0.0-rtm.23468.5</MicrosoftExtensionsHttpResilienceVersion>
+    <MicrosoftExtensionsHttpTelemetryVersion>8.0.0-rtm.23468.5</MicrosoftExtensionsHttpTelemetryVersion>
+    <MicrosoftExtensionsTelemetryAbstractionsVersion>8.0.0-rtm.23468.5</MicrosoftExtensionsTelemetryAbstractionsVersion>
+    <MicrosoftExtensionsTelemetryTestingVersion>8.0.0-rtm.23468.5</MicrosoftExtensionsTelemetryTestingVersion>
+    <MicrosoftExtensionsTelemetryVersion>8.0.0-rtm.23468.5</MicrosoftExtensionsTelemetryVersion>
+    <MicrosoftExtensionsTimeProviderTestingVersion>8.0.0-rtm.23468.5</MicrosoftExtensionsTimeProviderTestingVersion>
     <MicrosoftExtensionsOptionsValidateOnStartVersion>8.0.0-rc.1.23410.8</MicrosoftExtensionsOptionsValidateOnStartVersion>
     <SystemCloudDocumentDbAbstractionsVersion>8.0.0-rc.2.23417.1</SystemCloudDocumentDbAbstractionsVersion>
     <SystemCloudMessagingVersion>8.0.0-rc.2.23417.1</SystemCloudMessagingVersion>
